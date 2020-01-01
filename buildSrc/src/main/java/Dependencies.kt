@@ -1,7 +1,7 @@
 object Dependencies {
 
     // Plugin
-    const val kotlinStandardLibrary = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
+    const val kotlinStandardLibrary = "org.jetbrains.kotlin:kotlin-stdlib"
     const val kotlinPoet = "com.squareup:kotlinpoet:${Versions.kotlinPoet}"
 
     // Testing
