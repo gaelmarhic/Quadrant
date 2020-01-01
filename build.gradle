@@ -10,6 +10,7 @@ repositories {
 dependencies {
 
     // Plugin
+    implementation gradleApi()
     implementation Dependencies.kotlinStandardLibrary
     implementation Dependencies.kotlinPoet
 
