@@ -5,12 +5,14 @@ plugins {
 repositories {
     jcenter()
     mavenCentral()
+    google()
 }
 
 dependencies {
 
     // Plugin
     implementation gradleApi()
+    implementation Dependencies.androidPlugin
     implementation Dependencies.kotlinStandardLibrary
     implementation Dependencies.kotlinPoet
 
