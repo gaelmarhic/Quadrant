@@ -2,11 +2,13 @@ apply plugin: 'groovy'
 
 repositories {
     jcenter()
+    mavenCentral()
 }
 
 dependencies {
 
     // Plugin
+    implementation Dependencies.kotlinStandardLibrary
     implementation Dependencies.kotlinPoet
 
     // Testing
