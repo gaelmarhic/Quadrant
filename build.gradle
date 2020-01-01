@@ -1,0 +1,17 @@
+apply plugin: 'groovy'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+
+    // Plugin
+    implementation Dependencies.kotlinPoet
+
+    // Testing
+    testImplementation Dependencies.jUnit
+}
+
+group = "com.gaelmarhic"
+version = "1.0"
