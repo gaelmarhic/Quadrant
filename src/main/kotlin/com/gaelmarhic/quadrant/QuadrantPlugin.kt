@@ -3,7 +3,7 @@ package com.gaelmarhic.quadrant
 import com.android.build.gradle.*
 import com.android.build.gradle.api.AndroidSourceSet
 import com.android.build.gradle.api.BaseVariant
-import com.gaelmarhic.quadrant.constants.QuadrantConstants.PLUGIN_NAME
+import com.gaelmarhic.quadrant.constants.QuadrantConstants.PLUGIN_CONFIG
 import com.gaelmarhic.quadrant.constants.QuadrantConstants.TARGET_DIRECTORY
 import com.gaelmarhic.quadrant.extensions.QuadrantConfigurationExtension
 import com.gaelmarhic.quadrant.tasks.GenerateActivityClassNameConstantTask
@@ -44,8 +44,7 @@ class QuadrantPlugin : Plugin<Project> {
     }
 
     private fun Project.registerConfigurationExtension() {
-        val configurationExtension = QuadrantConfigurationExtension()
-        extensions.add(PLUGIN_NAME, configurationExtension)
+        extensions.create(PLUGIN_CONFIG, QuadrantConfigurationExtension::class.java)
     }
 
     private fun <V : BaseVariant> Project.registerTask(

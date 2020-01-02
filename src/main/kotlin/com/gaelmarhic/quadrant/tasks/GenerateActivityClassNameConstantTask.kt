@@ -1,5 +1,6 @@
 package com.gaelmarhic.quadrant.tasks
 
+import com.gaelmarhic.quadrant.constants.QuadrantConstants.PLUGIN_CONFIG
 import com.gaelmarhic.quadrant.constants.QuadrantConstants.PLUGIN_NAME
 import com.gaelmarhic.quadrant.extensions.QuadrantConfigurationExtension
 import org.gradle.api.DefaultTask
@@ -20,7 +21,7 @@ open class GenerateActivityClassNameConstantTask : DefaultTask() {
     }
 
     private fun retrieveConfigurationExtension() =
-        project.extensions.findByName(PLUGIN_NAME) as QuadrantConfigurationExtension
+        project.extensions.findByName(PLUGIN_CONFIG) as QuadrantConfigurationExtension
 
     companion object {
 
