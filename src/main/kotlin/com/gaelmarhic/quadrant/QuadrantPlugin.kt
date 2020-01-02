@@ -26,7 +26,6 @@ class QuadrantPlugin : Plugin<Project> {
                 is LibraryPlugin -> {
                     applyPlugin(LibraryExtension::class) { it.libraryVariants }
                 }
-                else -> throw UnsupportedOperationException(WRONG_MODULE_TYPE_ERROR_MESSAGE)
             }
         }
     }
@@ -87,7 +86,5 @@ class QuadrantPlugin : Plugin<Project> {
     companion object {
 
         private const val MAIN_SOURCE_SET = "main"
-        private const val WRONG_MODULE_TYPE_ERROR_MESSAGE =
-            "$PLUGIN_NAME can only be applied to Android Application or Android Library modules."
     }
 }
