@@ -8,6 +8,7 @@ import com.gaelmarhic.quadrant.QuadrantConstants.TARGET_DIRECTORY
 import org.gradle.api.DomainObjectCollection
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.plugins.ExtensionContainer
 import java.io.File
 import kotlin.reflect.KClass
@@ -36,6 +37,13 @@ class QuadrantPlugin : Plugin<Project> {
         val variants = block(extension)
         val mainSourceSet = extension.sourceSet(MAIN_SOURCE_SET)
         addTargetDirectoryToSourceSet(mainSourceSet)
+    }
+
+    private fun <V : BaseVariant> Project.registerTask(
+        task: Task,
+        variants: DomainObjectCollection<V>
+    ) {
+        // TODO: To be implemented.
     }
 
     private fun Project.addTargetDirectoryToSourceSet(sourceSet: AndroidSourceSet) {
