@@ -5,6 +5,7 @@ import com.android.build.gradle.api.AndroidSourceSet
 import com.android.build.gradle.api.BaseVariant
 import com.gaelmarhic.quadrant.constants.QuadrantConstants.PLUGIN_NAME
 import com.gaelmarhic.quadrant.constants.QuadrantConstants.TARGET_DIRECTORY
+import com.gaelmarhic.quadrant.extensions.QuadrantConfigurationExtension
 import com.gaelmarhic.quadrant.tasks.GenerateActivityClassNameConstantTask
 import org.gradle.api.DomainObjectCollection
 import org.gradle.api.Plugin
@@ -38,8 +39,14 @@ class QuadrantPlugin : Plugin<Project> {
         val variants = block(extension)
         val mainSourceSet = extension.sourceSet(MAIN_SOURCE_SET)
 
+        registerConfigurationExtension()
         registerTask(createTask(GenerateActivityClassNameConstantTask::class.java), variants)
         addTargetDirectoryToSourceSet(mainSourceSet)
+    }
+
+    private fun Project.registerConfigurationExtension() {
+        val configurationExtension = QuadrantConfigurationExtension()
+        extensions.add(PLUGIN_NAME, configurationExtension)
     }
 
     private fun <V : BaseVariant> Project.registerTask(
