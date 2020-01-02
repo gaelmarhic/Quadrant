@@ -5,6 +5,7 @@ import com.android.build.gradle.api.AndroidSourceSet
 import com.android.build.gradle.api.BaseVariant
 import com.gaelmarhic.quadrant.QuadrantConstants.PLUGIN_NAME
 import com.gaelmarhic.quadrant.QuadrantConstants.TARGET_DIRECTORY
+import com.gaelmarhic.quadrant.tasks.GenerateActivityClassNameConstantTask
 import org.gradle.api.DomainObjectCollection
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -36,14 +37,24 @@ class QuadrantPlugin : Plugin<Project> {
         val extension = getExtension(extensionType)
         val variants = block(extension)
         val mainSourceSet = extension.sourceSet(MAIN_SOURCE_SET)
+
+        registerTask(createTask(GenerateActivityClassNameConstantTask::class.java), variants)
         addTargetDirectoryToSourceSet(mainSourceSet)
     }
 
     private fun <V : BaseVariant> Project.registerTask(
-        task: Task,
+        taskToBeRegistered: Task,
         variants: DomainObjectCollection<V>
     ) {
-        // TODO: To be implemented.
+        afterEvaluate {
+            variants.all { variant ->
+                tasks.all { task ->
+                    if (task.isCompileKotlinTask(variant)) {
+                        task.dependsOn(taskToBeRegistered)
+                    }
+                }
+            }
+        }
     }
 
     private fun Project.addTargetDirectoryToSourceSet(sourceSet: AndroidSourceSet) {
@@ -56,7 +67,15 @@ class QuadrantPlugin : Plugin<Project> {
         return getByType(type.java)
     }
 
+    private fun <T : Task> Project.createTask(taskType: Class<T>): Task {
+        val taskName = taskType.simpleName.decapitalize()
+        return tasks.create(taskName, taskType)
+    }
+
     private fun BaseExtension.sourceSet(name: String) = sourceSets.getByName(name)
+
+    private fun <T : BaseVariant> Task.isCompileKotlinTask(variant: T) =
+        name == "compile${variant.name.capitalize()}Kotlin"
 
     companion object {
 
