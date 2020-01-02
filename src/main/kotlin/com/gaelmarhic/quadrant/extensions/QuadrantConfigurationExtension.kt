@@ -1,5 +1,5 @@
 package com.gaelmarhic.quadrant.extensions
 
-class QuadrantConfigurationExtension {
+open class QuadrantConfigurationExtension {
     var generateAllConstantsByDefault: Boolean = true
 }
