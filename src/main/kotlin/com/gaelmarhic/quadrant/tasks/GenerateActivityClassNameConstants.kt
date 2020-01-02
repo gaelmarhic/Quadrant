@@ -6,7 +6,7 @@ import com.gaelmarhic.quadrant.extensions.QuadrantConfigurationExtension
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
-open class GenerateActivityClassNameConstantTask : DefaultTask() {
+open class GenerateActivityClassNameConstants : DefaultTask() {
 
     private val configurationExtension by lazy { retrieveConfigurationExtension() }
 
