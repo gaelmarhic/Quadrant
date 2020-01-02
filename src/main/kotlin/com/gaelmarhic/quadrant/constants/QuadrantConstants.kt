@@ -1,4 +1,4 @@
-package com.gaelmarhic.quadrant
+package com.gaelmarhic.quadrant.constants
 
 import java.io.File
 

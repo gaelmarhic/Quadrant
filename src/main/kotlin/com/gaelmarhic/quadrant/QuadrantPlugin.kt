@@ -3,8 +3,8 @@ package com.gaelmarhic.quadrant
 import com.android.build.gradle.*
 import com.android.build.gradle.api.AndroidSourceSet
 import com.android.build.gradle.api.BaseVariant
-import com.gaelmarhic.quadrant.QuadrantConstants.PLUGIN_NAME
-import com.gaelmarhic.quadrant.QuadrantConstants.TARGET_DIRECTORY
+import com.gaelmarhic.quadrant.constants.QuadrantConstants.PLUGIN_NAME
+import com.gaelmarhic.quadrant.constants.QuadrantConstants.TARGET_DIRECTORY
 import com.gaelmarhic.quadrant.tasks.GenerateActivityClassNameConstantTask
 import org.gradle.api.DomainObjectCollection
 import org.gradle.api.Plugin
