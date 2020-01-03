@@ -1,4 +1,4 @@
-package com.gaelmarhic.quadrant.models
+package com.gaelmarhic.quadrant.models.manifest
 
 import com.gaelmarhic.quadrant.constants.ModelConstants.APPLICATION_TAG
 import com.gaelmarhic.quadrant.constants.ModelConstants.MANIFEST_TAG
@@ -14,5 +14,10 @@ data class Manifest(
     val application: Application
 ) {
     @Suppress("unused")
-    constructor() : this(application = Application(activityList = mutableListOf(), metaDataList = mutableListOf()))
+    constructor() : this(
+        application = Application(
+            activityList = mutableListOf(),
+            metaDataList = mutableListOf()
+        )
+    )
 }

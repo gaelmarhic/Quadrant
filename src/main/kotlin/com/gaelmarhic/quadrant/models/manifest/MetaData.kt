@@ -1,4 +1,4 @@
-package com.gaelmarhic.quadrant.models
+package com.gaelmarhic.quadrant.models.manifest
 
 import com.gaelmarhic.quadrant.constants.ModelConstants.ANDROID_NAMESPACE
 import com.gaelmarhic.quadrant.constants.ModelConstants.METADATA_NAME_ATTRIBUTE
