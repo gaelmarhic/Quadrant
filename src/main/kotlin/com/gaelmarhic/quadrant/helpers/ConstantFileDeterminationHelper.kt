@@ -16,7 +16,7 @@ class ConstantFileDeterminationHelper {
         FileToBeGenerated(
             name = SINGLE_FILE_NAME,
             constantList = this
-                .flatMap { it.activityList }
+                .flatMap { it.filteredActivityList }
                 .map { it.toConstant() }
         )
     )

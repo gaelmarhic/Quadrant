@@ -4,5 +4,5 @@ import com.gaelmarhic.quadrant.models.manifest.Activity
 
 data class FilteredModule(
     val name: String,
-    val activityList: List<Activity>
+    val filteredActivityList: List<Activity>
 )
