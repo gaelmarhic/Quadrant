@@ -9,7 +9,7 @@ class ActivityFilteringHelper {
 
     fun filter(parsedModules: List<ParsedModule>) =
         parsedModules
-            .map { module -> module.filterActivities() }
+            .map { it.filterActivities() }
 
     private fun ParsedModule.filterActivities() =
         applyFilter { noFilter }
