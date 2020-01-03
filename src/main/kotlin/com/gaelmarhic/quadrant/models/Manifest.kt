@@ -14,5 +14,5 @@ data class Manifest(
     val application: Application
 ) {
     @Suppress("unused")
-    constructor() : this(application = Application(activities = mutableListOf()))
+    constructor() : this(application = Application(activityList = mutableListOf(), metaDataList = mutableListOf()))
 }
