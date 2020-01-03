@@ -1,7 +1,7 @@
 package com.gaelmarhic.quadrant.models
 
-import com.gaelmarhic.quadrant.models.Constants.APPLICATION_TAG
-import com.gaelmarhic.quadrant.models.Constants.MANIFEST_TAG
+import com.gaelmarhic.quadrant.constants.ModelConstants.APPLICATION_TAG
+import com.gaelmarhic.quadrant.constants.ModelConstants.MANIFEST_TAG
 import javax.xml.bind.annotation.XmlAccessType.FIELD
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlElement

@@ -1,9 +1,9 @@
 package com.gaelmarhic.quadrant.models
 
-import com.gaelmarhic.quadrant.models.Constants.ANDROID_NAMESPACE
-import com.gaelmarhic.quadrant.models.Constants.METADATA_NAME_ATTRIBUTE
-import com.gaelmarhic.quadrant.models.Constants.METADATA_TAG
-import com.gaelmarhic.quadrant.models.Constants.METADATA_VALUE_ATTRIBUTE
+import com.gaelmarhic.quadrant.constants.ModelConstants.ANDROID_NAMESPACE
+import com.gaelmarhic.quadrant.constants.ModelConstants.METADATA_NAME_ATTRIBUTE
+import com.gaelmarhic.quadrant.constants.ModelConstants.METADATA_TAG
+import com.gaelmarhic.quadrant.constants.ModelConstants.METADATA_VALUE_ATTRIBUTE
 import javax.xml.bind.annotation.XmlAccessType.FIELD
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlAttribute

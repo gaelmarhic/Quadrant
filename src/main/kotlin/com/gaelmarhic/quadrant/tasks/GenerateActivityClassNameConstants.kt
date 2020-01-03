@@ -1,7 +1,7 @@
 package com.gaelmarhic.quadrant.tasks
 
-import com.gaelmarhic.quadrant.constants.QuadrantConstants.PLUGIN_CONFIG
-import com.gaelmarhic.quadrant.constants.QuadrantConstants.PLUGIN_NAME
+import com.gaelmarhic.quadrant.constants.GeneralConstants.PLUGIN_CONFIG
+import com.gaelmarhic.quadrant.constants.GeneralConstants.PLUGIN_NAME
 import com.gaelmarhic.quadrant.extensions.QuadrantConfigurationExtension
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
