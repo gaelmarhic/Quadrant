@@ -12,6 +12,7 @@ import com.gaelmarhic.quadrant.models.modules.RawModule
 import com.gaelmarhic.quadrant.processors.GenerateActivityClassNameConstantProcessor
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
+import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
@@ -24,6 +25,9 @@ open class GenerateActivityClassNameConstants : DefaultTask() {
     private val rawModules by lazy { retrieveRawModules() }
 
     private val processor by lazy { initProcessor() }
+
+    @InputFile
+    val buildScript = project.buildFile
 
     @InputFiles
     val manifestFiles = rawModules?.flatMap { it.manifestFiles }
