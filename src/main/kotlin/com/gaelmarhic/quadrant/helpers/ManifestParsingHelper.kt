@@ -1,6 +1,7 @@
 package com.gaelmarhic.quadrant.helpers
 
 import com.gaelmarhic.quadrant.models.manifest.Manifest
+import com.gaelmarhic.quadrant.models.modules.ParsedManifest
 import com.gaelmarhic.quadrant.models.modules.ParsedModule
 import com.gaelmarhic.quadrant.models.modules.RawModule
 import java.io.File
@@ -20,6 +21,17 @@ class ManifestParsingHelper {
     )
 
     private fun List<File>.toManifestList() = this
-        .map { jaxbUnMarshaller.unmarshal(it) }
-        .map { it as Manifest }
+        .map { it.toManifest() }
+
+    private fun File.toManifest() =
+        jaxbUnMarshaller
+            .unmarshal(this)
+            .let { it as Manifest }
+            .let {
+                ParsedManifest(
+                    path = absolutePath,
+                    packageName = it.packageName,
+                    application = it.application
+                )
+            }
 }

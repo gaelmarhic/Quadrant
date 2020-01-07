@@ -14,10 +14,10 @@ import javax.xml.bind.annotation.XmlRootElement
 @XmlAccessorType(FIELD)
 data class Activity(
     @field:XmlAttribute(name = ACTIVITY_NAME_ATTRIBUTE, namespace = ANDROID_NAMESPACE)
-    val name: String,
+    val className: String,
     @field:XmlElement(name = METADATA_TAG)
     val metaDataList: MutableList<MetaData>
 ) {
     @Suppress("unused")
-    constructor() : this(name = "", metaDataList = mutableListOf())
+    constructor() : this(className = "", metaDataList = mutableListOf())
 }

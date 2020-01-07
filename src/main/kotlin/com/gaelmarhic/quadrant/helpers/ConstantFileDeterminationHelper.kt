@@ -3,7 +3,6 @@ package com.gaelmarhic.quadrant.helpers
 import com.gaelmarhic.quadrant.constants.GeneralConstants.PLUGIN_NAME
 import com.gaelmarhic.quadrant.models.generation.ConstantToBeGenerated
 import com.gaelmarhic.quadrant.models.generation.FileToBeGenerated
-import com.gaelmarhic.quadrant.models.manifest.Activity
 import com.gaelmarhic.quadrant.models.modules.FilteredModule
 
 class ConstantFileDeterminationHelper {
@@ -16,14 +15,14 @@ class ConstantFileDeterminationHelper {
         FileToBeGenerated(
             name = SINGLE_FILE_NAME,
             constantList = this
-                .flatMap { it.filteredActivityList }
+                .flatMap { it.filteredClassNameList }
                 .map { it.toConstant() }
         )
     )
 
-    private fun Activity.toConstant() = ConstantToBeGenerated(
-        name = name.formatConstantName(),
-        value = name
+    private fun String.toConstant() = ConstantToBeGenerated(
+        name = formatConstantName(),
+        value = this
     )
 
     private fun String.formatConstantName() =

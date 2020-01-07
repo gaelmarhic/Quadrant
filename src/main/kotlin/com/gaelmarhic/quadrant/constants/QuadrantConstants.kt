@@ -13,11 +13,13 @@ object GeneralConstants {
 object ModelConstants {
 
     const val MANIFEST_TAG = "manifest"
+    const val MANIFEST_PACKAGE_ATTRIBUTE = "package"
     const val APPLICATION_TAG = "application"
     const val ACTIVITY_TAG = "activity"
     const val ACTIVITY_NAME_ATTRIBUTE = "name"
     const val METADATA_TAG = "meta-data"
     const val METADATA_NAME_ATTRIBUTE = "name"
+    const val METADATA_NAME_ATTRIBUTE_ADDRESSABLE_VALUE = "addressable"
     const val METADATA_VALUE_ATTRIBUTE = "value"
     const val ANDROID_NAMESPACE = "http://schemas.android.com/apk/res/android"
 }

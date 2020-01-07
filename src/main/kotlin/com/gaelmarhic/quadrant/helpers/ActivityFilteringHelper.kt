@@ -1,8 +1,7 @@
 package com.gaelmarhic.quadrant.helpers
 
-import com.gaelmarhic.quadrant.models.manifest.Activity
-import com.gaelmarhic.quadrant.models.manifest.Manifest
 import com.gaelmarhic.quadrant.models.modules.FilteredModule
+import com.gaelmarhic.quadrant.models.modules.ParsedManifest
 import com.gaelmarhic.quadrant.models.modules.ParsedModule
 
 class ActivityFilteringHelper {
@@ -14,11 +13,16 @@ class ActivityFilteringHelper {
     private fun ParsedModule.filterActivities() =
         applyFilter { noFilter }
 
-    private fun ParsedModule.applyFilter(predicate: List<Manifest>.() -> List<Activity>) = FilteredModule(
+    private fun ParsedModule.applyFilter(predicate: List<ParsedManifest>.() -> List<String>) = FilteredModule(
         name = name,
-        filteredActivityList = predicate(manifestList)
+        filteredClassNameList = predicate(manifestList)
     )
 
-    private val List<Manifest>.noFilter
-        get() = this.flatMap { it.application.activityList }
+    private val List<ParsedManifest>.noFilter
+        get() = flatMap { manifest ->
+            manifest
+                .application
+                .activityList
+                .map { it.className }
+        }
 }
