@@ -23,3 +23,9 @@ object ModelConstants {
     const val METADATA_VALUE_ATTRIBUTE = "value"
     const val ANDROID_NAMESPACE = "http://schemas.android.com/apk/res/android"
 }
+
+object Miscellaneous {
+
+    const val TRUE = "true"
+    const val FALSE = "false"
+}
