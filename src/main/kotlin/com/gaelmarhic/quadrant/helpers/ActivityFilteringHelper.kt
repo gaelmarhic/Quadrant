@@ -58,7 +58,7 @@ class ActivityFilteringHelper(
                 when (applicationAddressability) {
                     TRUE -> true
                     FALSE -> false
-                    UNDEFINED -> configurationExtension.generateAllConstantsByDefault
+                    UNDEFINED -> configurationExtension.generateByDefault
                 }
             }
         }
