@@ -4,10 +4,7 @@ import com.gaelmarhic.quadrant.constants.GeneralConstants.PLUGIN_CONFIG
 import com.gaelmarhic.quadrant.constants.GeneralConstants.PLUGIN_NAME
 import com.gaelmarhic.quadrant.constants.GeneralConstants.TARGET_DIRECTORY
 import com.gaelmarhic.quadrant.extensions.QuadrantConfigurationExtension
-import com.gaelmarhic.quadrant.helpers.ActivityFilteringHelper
-import com.gaelmarhic.quadrant.helpers.ConstantFileDeterminationHelper
-import com.gaelmarhic.quadrant.helpers.ConstantGenerationHelper
-import com.gaelmarhic.quadrant.helpers.ManifestParsingHelper
+import com.gaelmarhic.quadrant.helpers.*
 import com.gaelmarhic.quadrant.models.modules.RawModule
 import com.gaelmarhic.quadrant.processors.GenerateActivityClassNameConstantProcessor
 import org.gradle.api.DefaultTask
@@ -68,7 +65,10 @@ open class GenerateActivityClassNameConstants : DefaultTask() {
 
     private fun initProcessor() = GenerateActivityClassNameConstantProcessor(
         manifestParsingHelper = ManifestParsingHelper(),
-        activityFilteringHelper = ActivityFilteringHelper(),
+        manifestVerificationHelper = ManifestVerificationHelper(),
+        activityFilteringHelper = ActivityFilteringHelper(
+            configurationExtension = configurationExtension
+        ),
         constantFileDeterminationHelper = ConstantFileDeterminationHelper(),
         constantGenerationHelper = ConstantGenerationHelper(targetDirectory)
     )
