@@ -28,14 +28,18 @@ class ConstantFileDeterminationHelper(
             )
         }
 
-    private fun List<FilteredModule>.toSingleFile() = listOf(
-        FileToBeGenerated(
-            name = SINGLE_FILE_NAME,
-            constantList = this
-                .flatMap { it.filteredClassNameList }
-                .map { it.toConstant() }
-        )
-    )
+    private fun List<FilteredModule>.toSingleFile() =
+        flatMap { it.filteredClassNameList }
+            .takeIf { it.isNotEmpty() }
+            ?.map { it.toConstant() }
+            ?.let { constantList ->
+                listOf(
+                    FileToBeGenerated(
+                        name = SINGLE_FILE_NAME,
+                        constantList = constantList
+                    )
+                )
+            } ?: emptyList()
 
     private fun String.toConstant() = ConstantToBeGenerated(
         name = formatConstantName(),
