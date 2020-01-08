@@ -1,15 +1,32 @@
 package com.gaelmarhic.quadrant.helpers
 
 import com.gaelmarhic.quadrant.constants.GeneralConstants.PLUGIN_NAME
+import com.gaelmarhic.quadrant.extensions.QuadrantConfigurationExtension
 import com.gaelmarhic.quadrant.models.generation.ConstantToBeGenerated
 import com.gaelmarhic.quadrant.models.generation.FileToBeGenerated
 import com.gaelmarhic.quadrant.models.modules.FilteredModule
 
-class ConstantFileDeterminationHelper {
+class ConstantFileDeterminationHelper(
+    private val configurationExtension: QuadrantConfigurationExtension
+) {
 
-    fun determine(filteredModules: List<FilteredModule>) =
-        filteredModules
-            .toSingleFile()
+    fun determine(filteredModules: List<FilteredModule>) = with(filteredModules) {
+        if (configurationExtension.perModule) {
+            toMultipleFiles()
+        } else {
+            toSingleFile()
+        }
+    }
+
+    private fun List<FilteredModule>.toMultipleFiles() =
+        map { module ->
+            FileToBeGenerated(
+                name = module.name.capitalize(),
+                constantList = module
+                    .filteredClassNameList
+                    .map { it.toConstant() }
+            )
+        }
 
     private fun List<FilteredModule>.toSingleFile() = listOf(
         FileToBeGenerated(

@@ -17,12 +17,18 @@ class ActivityFilteringHelper(
 
     fun filter(parsedModules: List<ParsedModule>) =
         parsedModules
-            .map { it.applyFilter() }
+            .mapNotNull { it.applyFilter() }
 
-    private fun ParsedModule.applyFilter() = FilteredModule(
-        name = name,
-        filteredClassNameList = manifestList.filterClassNames()
-    )
+    private fun ParsedModule.applyFilter() =
+        manifestList
+            .filterClassNames()
+            .takeIf { it.isNotEmpty() }
+            ?.let { classNames ->
+                FilteredModule(
+                    name = name,
+                    filteredClassNameList = classNames
+                )
+            }
 
     private fun List<ParsedManifest>.filterClassNames() =
         mutableListOf<String>().apply {

@@ -69,7 +69,9 @@ open class GenerateActivityClassNameConstants : DefaultTask() {
         activityFilteringHelper = ActivityFilteringHelper(
             configurationExtension = configurationExtension
         ),
-        constantFileDeterminationHelper = ConstantFileDeterminationHelper(),
+        constantFileDeterminationHelper = ConstantFileDeterminationHelper(
+            configurationExtension = configurationExtension
+        ),
         constantGenerationHelper = ConstantGenerationHelper(targetDirectory)
     )
 
