@@ -15,8 +15,6 @@ class ActivityFilteringHelper(
     private val configurationExtension: QuadrantConfigurationExtension
 ) {
 
-    private val generateAllConstantsByDefault by lazy { configurationExtension.generateAllConstantsByDefault }
-
     fun filter(parsedModules: List<ParsedModule>) =
         parsedModules
             .map { it.applyFilter() }
@@ -60,7 +58,7 @@ class ActivityFilteringHelper(
                 when (applicationAddressability) {
                     TRUE -> true
                     FALSE -> false
-                    UNDEFINED -> generateAllConstantsByDefault
+                    UNDEFINED -> configurationExtension.generateAllConstantsByDefault
                 }
             }
         }
