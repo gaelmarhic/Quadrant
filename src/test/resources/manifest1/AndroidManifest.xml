@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.gaelmarhic.quadrant">
+
+    <application>
+
+        <activity android:name="com.gaelmarhic.quadrant.Manifest1Activity1">
+
+            <meta-data
+                    android:name="addressable"
+                    android:value="true"/>
+
+        </activity>
+
+        <activity android:name="com.gaelmarhic.quadrant.Manifest1Activity2"/>
+
+    </application>
+
+    <meta-data
+            android:name="addressable"
+            android:value="false"/>
+
+</manifest>
