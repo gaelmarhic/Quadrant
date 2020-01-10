@@ -14,10 +14,10 @@
 
         <activity android:name="com.gaelmarhic.quadrant.Manifest1Activity2"/>
 
-    </application>
+        <meta-data
+                android:name="addressable"
+                android:value="false"/>
 
-    <meta-data
-            android:name="addressable"
-            android:value="false"/>
+    </application>
 
 </manifest>
