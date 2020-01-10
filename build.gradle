@@ -20,6 +20,7 @@ dependencies {
     // Testing
     testImplementation Dependencies.jUnit5Api
     testRuntimeOnly Dependencies.jUnit5Engine
+    testImplementation Dependencies.assertJ
 }
 
 compileKotlin {

@@ -6,4 +6,5 @@ object Versions {
 
     // Testing
     const val jUnit5 = "5.3.1"
+    const val assertJ = "3.14.0"
 }

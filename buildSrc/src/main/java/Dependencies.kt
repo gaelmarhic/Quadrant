@@ -8,4 +8,5 @@ object Dependencies {
     // Testing
     const val jUnit5Api = "org.junit.jupiter:junit-jupiter-api:${Versions.jUnit5}"
     const val jUnit5Engine = "org.junit.jupiter:junit-jupiter-engine:${Versions.jUnit5}"
+    const val assertJ = "org.assertj:assertj-core:${Versions.assertJ}"
 }
