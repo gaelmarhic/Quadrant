@@ -6,5 +6,6 @@ object Dependencies {
     const val kotlinPoet = "com.squareup:kotlinpoet:${Versions.kotlinPoet}"
 
     // Testing
-    const val jUnit = "junit:junit:${Versions.jUnit}"
+    const val jUnit5Api = "org.junit.jupiter:junit-jupiter-api:${Versions.jUnit5}"
+    const val jUnit5Engine = "org.junit.jupiter:junit-jupiter-engine:${Versions.jUnit5}"
 }

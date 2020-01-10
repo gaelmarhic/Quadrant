@@ -18,7 +18,8 @@ dependencies {
     implementation Dependencies.kotlinPoet
 
     // Testing
-    testImplementation Dependencies.jUnit
+    testImplementation Dependencies.jUnit5Api
+    testRuntimeOnly Dependencies.jUnit5Engine
 }
 
 compileKotlin {
@@ -38,4 +39,8 @@ uploadArchives {
             repository(url: uri('mavenrepo'))
         }
     }
+}
+
+test {
+    useJUnitPlatform()
 }
