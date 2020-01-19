@@ -19,7 +19,7 @@ internal class ConstantFileDeterminationHelperTest {
     )
 
     @Nested
-    @DisplayName("When configuration is set to generate constants per module")
+    @DisplayName("When the configuration is set to generate constants per module")
     inner class PerModule {
 
         @BeforeEach
@@ -146,7 +146,7 @@ internal class ConstantFileDeterminationHelperTest {
     }
 
     @Nested
-    @DisplayName("When configuration is NOT set to generate constants per module")
+    @DisplayName("When the configuration is NOT set to generate constants per module")
     inner class NotPerModule {
 
         @BeforeEach
