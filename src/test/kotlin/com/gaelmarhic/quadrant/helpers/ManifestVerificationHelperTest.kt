@@ -182,7 +182,7 @@ internal class ManifestVerificationHelperTest {
         fun `Should throw an exception when the package is incorrect in one manifest`() {
 
             // Then
-            assertThrws<IllegalStateException> {
+            assertThrows<IllegalStateException> {
 
                 // Given
                 val parsedModule = ParsedModule(
