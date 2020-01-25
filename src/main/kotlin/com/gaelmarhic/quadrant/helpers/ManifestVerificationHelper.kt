@@ -42,7 +42,7 @@ class ManifestVerificationHelper {
 
     private fun Application.findClassNameFormatErrors(packageName: String) =
         activityList
-            .filter { !it.className.startsWith(packageName) }
+            .filte { !startsWithPackage(it.className, packageName) }
             .map { it.className }
             .distinct()
 
