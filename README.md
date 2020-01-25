@@ -1,3 +1,5 @@
+![Pipeline](https://github.com/gaelmarhic/Quadrant/workflows/Pipeline/badge.svg?branch=master)
+
 To be written soon.
 
 License
