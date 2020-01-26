@@ -143,7 +143,7 @@ class ManifestVerificationHelper {
     private fun List<Application>.searchApplicationAddressabilityConflicts() =
         flatMap { it.metaDataList }
             .hasAddressabilityConflicts()
-            .let { hasConflicts -> if (hasConflicts) "$APPLICATION_TAG." else null }
+            .let { hasConflicts -> if (hasConflicts) APPLICATION_TAG else null }
             .wrapIntoList()
 
     private fun List<Activity>.searchActivityAddressabilityConflicts() =
@@ -169,6 +169,7 @@ class ManifestVerificationHelper {
     private fun formatClassNameFormatErrorMessage(errorHolders: List<ClassNameFormatErrorHolder>) =
         StringBuilder().apply {
             append(CLASS_NAME_FORMAT_ERROR_MESSAGE.trimIndent())
+            appendln()
             errorHolders.forEach { errorHolder ->
                 appendln()
                 append("$FILE: ${errorHolder.manifestFilePath}")
@@ -178,6 +179,7 @@ class ManifestVerificationHelper {
                     appendln()
                     append("     ${index + 1})$className")
                 }
+                appendln()
             }
         }.toString()
 
@@ -197,6 +199,7 @@ class ManifestVerificationHelper {
     private fun formatAddressableMetaDataConflictMessage(conflictHolders: List<AddressableMetaDataConflictHolder>) =
         StringBuilder().apply {
             append(ADDRESSABLE_METADATA_CONFLICT_MESSAGE.trimIndent())
+            appendln()
             conflictHolders.forEach { conflictHolder ->
                 appendln()
                 append("$MODULE: ${conflictHolder.moduleName}")
@@ -204,6 +207,7 @@ class ManifestVerificationHelper {
                     appendln()
                     append("     ${index + 1})$conflictingEntity")
                 }
+                appendln()
             }
         }.toString()
 
@@ -266,7 +270,7 @@ class ManifestVerificationHelper {
         private const val ADDRESSABLE_METADATA_CONFLICT_MESSAGE = """
             $CANNOT_PROCEED_ERROR_MESSAGE
             You have "addressable" meta-data conflicts. 
-            This means that you probably have different values (true/false) of "addressable" meta-datas for a same <activity> tag on your different manifest files of a same module. 
+            This means that you probably have different values (true/false) of "addressable" meta-datas for a same <activity> or <application> tag on your different manifest files of a same module. 
             Please, verify your different source sets.
                             
             Conflicts found in:
