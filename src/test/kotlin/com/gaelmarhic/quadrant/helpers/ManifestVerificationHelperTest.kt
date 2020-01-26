@@ -381,6 +381,185 @@ internal class ManifestVerificationHelperTest {
     }
 
     @Nested
+    inner class ClassNameDuplication {
+
+        @Test
+        fun `Should throw an exception when there is one duplicated class name`() {
+
+            // Then
+            assertThrows<IllegalStateException> {
+
+                val parsedModule1 = ParsedModule(
+                    name = "module1",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "module1ManifestPath",
+                            packageName = "com.gaelmarhic.quadrant.module",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = "com.gaelmarhic.quadrant.module.Activity1",
+                                        metaDataList = mutableListOf()
+                                    )
+                                ),
+                                metaDataList = mutableListOf()
+                            )
+                        )
+                    )
+                )
+
+                val parsedModule2 = ParsedModule(
+                    name = "module2",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "module2ManifestPath",
+                            packageName = "com.gaelmarhic.quadrant.module",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = "com.gaelmarhic.quadrant.module.Activity1",
+                                        metaDataList = mutableListOf()
+                                    )
+                                ),
+                                metaDataList = mutableListOf()
+                            )
+                        )
+                    )
+                )
+
+                val parsedModules = listOf(parsedModule1, parsedModule2)
+
+                // When
+                manifestVerificationHelper.verify(parsedModules)
+            }
+        }
+
+        @Test
+        fun `Should throw an exception when there are more than one duplicated class names`() {
+
+            // Then
+            assertThrows<IllegalStateException> {
+
+                val parsedModule1 = ParsedModule(
+                    name = "module1",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "module1ManifestPath",
+                            packageName = "com.gaelmarhic.quadrant.module",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = "com.gaelmarhic.quadrant.module.Activity1",
+                                        metaDataList = mutableListOf()
+                                    )
+                                ),
+                                metaDataList = mutableListOf()
+                            )
+                        )
+                    )
+                )
+
+                val parsedModule2 = ParsedModule(
+                    name = "module2",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "module2ManifestPath",
+                            packageName = "com.gaelmarhic.quadrant.module",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = "com.gaelmarhic.quadrant.module.Activity1",
+                                        metaDataList = mutableListOf()
+                                    ),
+                                    Activity(
+                                        className = "com.gaelmarhic.quadrant.module.Activity2",
+                                        metaDataList = mutableListOf()
+                                    )
+                                ),
+                                metaDataList = mutableListOf()
+                            )
+                        )
+                    )
+                )
+
+                val parsedModule3 = ParsedModule(
+                    name = "module3",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "module3ManifestPath",
+                            packageName = "com.gaelmarhic.quadrant.module",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = "com.gaelmarhic.quadrant.module.Activity2",
+                                        metaDataList = mutableListOf()
+                                    )
+                                ),
+                                metaDataList = mutableListOf()
+                            )
+                        )
+                    )
+                )
+
+                val parsedModules = listOf(parsedModule1, parsedModule2, parsedModule3)
+
+                // When
+                manifestVerificationHelper.verify(parsedModules)
+            }
+        }
+
+        @Test
+        fun `Should NOT throw any exception when there are no duplicated class names`() {
+
+            val parsedModule1 = ParsedModule(
+                name = "module1",
+                manifestList = listOf(
+                    ParsedManifest(
+                        path = "module1ManifestPath",
+                        packageName = "com.gaelmarhic.quadrant.module1",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.module1.Activity1",
+                                    metaDataList = mutableListOf()
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    )
+                )
+            )
+
+            val parsedModule2 = ParsedModule(
+                name = "module2",
+                manifestList = listOf(
+                    ParsedManifest(
+                        path = "module2ManifestPath",
+                        packageName = "com.gaelmarhic.quadrant.module2",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.module2.Activity1",
+                                    metaDataList = mutableListOf()
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    )
+                )
+            )
+
+            val parsedModules = listOf(parsedModule1, parsedModule2)
+
+            // When
+            manifestVerificationHelper.verify(parsedModules)
+
+            // Then
+            // No exception is thrown.
+        }
+    }
+
+    @Nested
     inner class AddressableMetaDatas {
 
         @Test

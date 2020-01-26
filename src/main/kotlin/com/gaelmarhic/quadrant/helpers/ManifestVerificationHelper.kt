@@ -7,12 +7,14 @@ import com.gaelmarhic.quadrant.constants.ModelConstants.METADATA_NAME_ATTRIBUTE_
 import com.gaelmarhic.quadrant.models.manifest.Activity
 import com.gaelmarhic.quadrant.models.manifest.Application
 import com.gaelmarhic.quadrant.models.manifest.MetaData
+import com.gaelmarhic.quadrant.models.modules.ParsedManifest
 import com.gaelmarhic.quadrant.models.modules.ParsedModule
 
 class ManifestVerificationHelper {
 
     fun verify(parsedModules: List<ParsedModule>) {
         verifyClassNameFormat(parsedModules)
+        verifyClassNameDuplication(parsedModules)
         verifyAddressableMetaDatas(parsedModules)
     }
 
@@ -34,7 +36,8 @@ class ManifestVerificationHelper {
                         }
                     }
                 }
-            }.ifNotEmptyThrow { errorHolders ->
+            }
+            .ifNotEmptyThrow { errorHolders ->
                 val formattedMessage = formatClassNameFormatErrorMessage(errorHolders)
                 IllegalStateException(formattedMessage)
             }
@@ -58,6 +61,51 @@ class ManifestVerificationHelper {
         }
         return true
     }
+
+    private fun verifyClassNameDuplication(modules: List<ParsedModule>) {
+        mutableListOf<ClassNameDuplicationHolder>()
+            .apply {
+                modules
+                    .findClassNameUsage()
+                    .forEach { (className, modules) ->
+                        if (modules.moreThanOne()) {
+                            add(
+                                ClassNameDuplicationHolder(
+                                    className = className,
+                                    modules = modules
+                                )
+                            )
+                        }
+                    }
+            }
+            .ifNotEmptyThrow { duplicationHolders ->
+                val formattedMessage = formatClassNameDuplicationMessage(duplicationHolders)
+                IllegalStateException(formattedMessage)
+            }
+    }
+
+    private fun List<ParsedModule>.findClassNameUsage() =
+        flatMap { module ->
+            module
+                .toUniqueClassNames()
+                .map { it to module.name }
+        }
+            .groupBy { it.first }
+            .map { group ->
+                group.run { key to value.map { it.second } }
+            }
+
+    private fun ParsedModule.toUniqueClassNames() =
+        manifestList
+            .flatMap { it.toClassNames() }
+            .distinct()
+
+    private fun ParsedManifest.toClassNames() =
+        application
+            .activityList
+            .map { it.className }
+
+    private fun List<Any>.moreThanOne() = size > 1
 
     private fun verifyAddressableMetaDatas(modules: List<ParsedModule>) {
         mutableListOf<AddressableMetaDataConflictHolder>()
@@ -133,6 +181,19 @@ class ManifestVerificationHelper {
             }
         }.toString()
 
+    private fun formatClassNameDuplicationMessage(duplicationHolders: List<ClassNameDuplicationHolder>) =
+        StringBuilder().apply {
+            append(CLASS_NAME_DUPLICATION_MESSAGE.trimIndent())
+            appendln()
+            duplicationHolders.forEach { duplicationHolder ->
+                appendln()
+                append("$CLASS_NAME: ${duplicationHolder.className}")
+                appendln()
+                append("$MODULES: ${duplicationHolder.modules.joinToString(DISPLAY_SEPARATOR)}")
+                appendln()
+            }
+        }.toString()
+
     private fun formatAddressableMetaDataConflictMessage(conflictHolders: List<AddressableMetaDataConflictHolder>) =
         StringBuilder().apply {
             append(ADDRESSABLE_METADATA_CONFLICT_MESSAGE.trimIndent())
@@ -166,6 +227,11 @@ class ManifestVerificationHelper {
         val classNames: List<String>
     )
 
+    private data class ClassNameDuplicationHolder(
+        val className: String,
+        val modules: List<String>
+    )
+
     private data class AddressableMetaDataConflictHolder(
         val moduleName: String,
         val conflictingEntities: List<String>
@@ -174,10 +240,13 @@ class ManifestVerificationHelper {
     companion object {
 
         private const val MODULE = "Module"
+        private const val MODULES = "Modules"
         private const val FILE = "File"
         private const val DECLARED_PACKAGE = "Declared package"
         private const val APPLICATION_TAG = "Application tag"
+        private const val CLASS_NAME = "Class name"
         private const val PACKAGE_SEPARATOR = "."
+        private const val DISPLAY_SEPARATOR = ", "
         private const val CANNOT_PROCEED_ERROR_MESSAGE = "$PLUGIN_NAME cannot proceed."
         private const val CLASS_NAME_FORMAT_ERROR_MESSAGE = """
             $CANNOT_PROCEED_ERROR_MESSAGE
@@ -186,6 +255,13 @@ class ManifestVerificationHelper {
             2) Declare correctly the package attribute's value of the <manifest> tag in your manifest files. By "correctly", we mean that it must correspond to the actual package organisation of your module's folders. Any mismatch will cause $PLUGIN_NAME to fail.
                             
             Errors found in:
+            """
+        private const val CLASS_NAME_DUPLICATION_MESSAGE = """
+            $CANNOT_PROCEED_ERROR_MESSAGE
+            You have duplicated class names across different modules.
+            For $PLUGIN_NAME to work, this must NOT happen.
+            
+            Duplicated class names: 
             """
         private const val ADDRESSABLE_METADATA_CONFLICT_MESSAGE = """
             $CANNOT_PROCEED_ERROR_MESSAGE
