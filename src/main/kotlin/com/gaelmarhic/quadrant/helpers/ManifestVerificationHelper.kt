@@ -42,9 +42,22 @@ class ManifestVerificationHelper {
 
     private fun Application.findClassNameFormatErrors(packageName: String) =
         activityList
-            .filter { !it.className.startsWith(packageName) }
+            .filter { !startsWithPackage(it.className, packageName) }
             .map { it.className }
             .distinct()
+
+    private fun startsWithPackage(className: String, packageName: String): Boolean {
+        val classNameSegments = className.split(PACKAGE_SEPARATOR)
+        val packageNameSegments = packageName.split(PACKAGE_SEPARATOR)
+        classNameSegments.forEachIndexed { index, classNameSegment ->
+            packageNameSegments.getOrNull(index)?.let { packageNameSegment ->
+                if (classNameSegment != packageNameSegment) {
+                    return false
+                }
+            }
+        }
+        return true
+    }
 
     private fun verifyAddressableMetaDatas(modules: List<ParsedModule>) {
         mutableListOf<AddressableMetaDataConflictHolder>()
@@ -164,6 +177,7 @@ class ManifestVerificationHelper {
         private const val FILE = "File"
         private const val DECLARED_PACKAGE = "Declared package"
         private const val APPLICATION_TAG = "Application tag"
+        private const val PACKAGE_SEPARATOR = "."
         private const val CANNOT_PROCEED_ERROR_MESSAGE = "$PLUGIN_NAME cannot proceed."
         private const val CLASS_NAME_FORMAT_ERROR_MESSAGE = """
             $CANNOT_PROCEED_ERROR_MESSAGE

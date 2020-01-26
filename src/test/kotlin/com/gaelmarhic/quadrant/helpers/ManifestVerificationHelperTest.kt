@@ -190,7 +190,7 @@ internal class ManifestVerificationHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifest1Path",
-                            packageName = "com.gaelmarhic.quadrant.wrongpackage",
+                            packageName = "com.gaelmarhic.quad",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -244,7 +244,7 @@ internal class ManifestVerificationHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifest1Path",
-                            packageName = "com.gaelmarhic.quadrant.wrongpackage",
+                            packageName = "com.gaelmarhic.quad",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -261,7 +261,7 @@ internal class ManifestVerificationHelperTest {
                         ),
                         ParsedManifest(
                             path = "manifest2Path",
-                            packageName = "com.gaelmarhic.quadrant.wrongpackage2",
+                            packageName = "com.gaelmarhic.quad",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
