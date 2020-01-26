@@ -169,6 +169,7 @@ class ManifestVerificationHelper {
     private fun formatClassNameFormatErrorMessage(errorHolders: List<ClassNameFormatErrorHolder>) =
         StringBuilder().apply {
             append(CLASS_NAME_FORMAT_ERROR_MESSAGE.trimIndent())
+            appendln()
             errorHolders.forEach { errorHolder ->
                 appendln()
                 append("$FILE: ${errorHolder.manifestFilePath}")
@@ -178,6 +179,7 @@ class ManifestVerificationHelper {
                     appendln()
                     append("     ${index + 1})$className")
                 }
+                appendln()
             }
         }.toString()
 
@@ -197,6 +199,7 @@ class ManifestVerificationHelper {
     private fun formatAddressableMetaDataConflictMessage(conflictHolders: List<AddressableMetaDataConflictHolder>) =
         StringBuilder().apply {
             append(ADDRESSABLE_METADATA_CONFLICT_MESSAGE.trimIndent())
+            appendln()
             conflictHolders.forEach { conflictHolder ->
                 appendln()
                 append("$MODULE: ${conflictHolder.moduleName}")
@@ -204,6 +207,7 @@ class ManifestVerificationHelper {
                     appendln()
                     append("     ${index + 1})$conflictingEntity")
                 }
+                appendln()
             }
         }.toString()
 
