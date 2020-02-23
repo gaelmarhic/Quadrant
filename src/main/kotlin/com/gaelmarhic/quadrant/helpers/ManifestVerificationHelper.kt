@@ -2,6 +2,7 @@ package com.gaelmarhic.quadrant.helpers
 
 import com.gaelmarhic.quadrant.constants.GeneralConstants.PLUGIN_NAME
 import com.gaelmarhic.quadrant.constants.Miscellaneous.FALSE
+import com.gaelmarhic.quadrant.constants.Miscellaneous.IGNORE
 import com.gaelmarhic.quadrant.constants.Miscellaneous.TRUE
 import com.gaelmarhic.quadrant.constants.ModelConstants.METADATA_NAME_ATTRIBUTE_ADDRESSABLE_VALUE
 import com.gaelmarhic.quadrant.models.manifest.Activity
@@ -45,6 +46,7 @@ class ManifestVerificationHelper {
 
     private fun Application.findClassNameFormatErrors(packageName: String) =
         activityList
+            .filterNot { it.metaDataList.hasIgnoreValue() }
             .filter { !startsWithPackage(it.className, packageName) }
             .map { it.className }
             .distinct()
@@ -103,6 +105,7 @@ class ManifestVerificationHelper {
     private fun ParsedManifest.toClassNames() =
         application
             .activityList
+            .filterNot { it.metaDataList.hasIgnoreValue() }
             .map { it.className }
 
     private fun List<Any>.moreThanOne() = size > 1
@@ -129,6 +132,7 @@ class ManifestVerificationHelper {
                 val applicationConflicts = searchApplicationAddressabilityConflicts()
                 val activityConflicts = this@toAddressableMetaDataConflictHolder
                     .flatMap { it.activityList }
+                    .filterNot { it.metaDataList.hasIgnoreValue() }
                     .searchActivityAddressabilityConflicts()
                 addAll(applicationConflicts)
                 addAll(activityConflicts)
@@ -210,6 +214,9 @@ class ManifestVerificationHelper {
                 appendln()
             }
         }.toString()
+
+    private fun List<MetaData>.hasIgnoreValue() =
+        find { it.name == PLUGIN_NAME.toLowerCase() && it.value == IGNORE } != null
 
     private fun String.toBoolean() = when (this) {
         TRUE -> true

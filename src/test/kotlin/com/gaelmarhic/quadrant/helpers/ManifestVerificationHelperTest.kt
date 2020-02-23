@@ -378,6 +378,190 @@ internal class ManifestVerificationHelperTest {
             // Then
             // No exception is thrown.
         }
+
+        @Test
+        fun `Should NOT throw any exception when one of the manifests' classnames is relative but it is ignored`() {
+
+            // Given
+            val parsedModule = ParsedModule(
+                name = "module",
+                manifestList = listOf(
+                    ParsedManifest(
+                        path = "manifest1Path",
+                        packageName = "com.gaelmarhic.quadrant",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = ".Activity1",
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "quadrant",
+                                            value = "ignore"
+                                        )
+                                    )
+                                ),
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Activity2",
+                                    metaDataList = mutableListOf()
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    ),
+                    ParsedManifest(
+                        path = "manifest2Path",
+                        packageName = "com.gaelmarhic.quadrant",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Activity1",
+                                    metaDataList = mutableListOf()
+                                ),
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Activity2",
+                                    metaDataList = mutableListOf()
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    )
+                )
+            )
+
+            val parsedModules = listOf(parsedModule)
+
+            // When
+            manifestVerificationHelper.verify(parsedModules)
+
+            // Then
+            // No exception is thrown.
+        }
+
+        @Test
+        fun `Should NOT throw any exception when several classnames in a same manifest are relative but are ignored`() {
+
+            // Given
+            val parsedModule = ParsedModule(
+                name = "module",
+                manifestList = listOf(
+                    ParsedManifest(
+                        path = "manifest1Path",
+                        packageName = "com.gaelmarhic.quadrant",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = ".Activity1",
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "quadrant",
+                                            value = "ignore"
+                                        )
+                                    )
+                                ),
+                                Activity(
+                                    className = ".Activity2",
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "quadrant",
+                                            value = "ignore"
+                                        )
+                                    )
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    ),
+                    ParsedManifest(
+                        path = "manifest2Path",
+                        packageName = "com.gaelmarhic.quadrant",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Activity1",
+                                    metaDataList = mutableListOf()
+                                ),
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Activity2",
+                                    metaDataList = mutableListOf()
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    )
+                )
+            )
+
+            val parsedModules = listOf(parsedModule)
+
+            // When
+            manifestVerificationHelper.verify(parsedModules)
+
+            // Then
+            // No exception is thrown.
+        }
+
+        @Test
+        fun `Should NOT throw any exception when classnames in different manifests are relative but are ignored`() {
+
+            // Given
+            val parsedModule = ParsedModule(
+                name = "module",
+                manifestList = listOf(
+                    ParsedManifest(
+                        path = "manifest1Path",
+                        packageName = "com.gaelmarhic.quadrant",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = ".Activity1",
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "quadrant",
+                                            value = "ignore"
+                                        )
+                                    )
+                                ),
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Activity2",
+                                    metaDataList = mutableListOf()
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    ),
+                    ParsedManifest(
+                        path = "manifest2Path",
+                        packageName = "com.gaelmarhic.quadrant",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Activity1",
+                                    metaDataList = mutableListOf()
+                                ),
+                                Activity(
+                                    className = ".Activity2",
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "quadrant",
+                                            value = "ignore"
+                                        )
+                                    )
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    )
+                )
+            )
+
+            val parsedModules = listOf(parsedModule)
+
+            // When
+            manifestVerificationHelper.verify(parsedModules)
+
+            // Then
+            // No exception is thrown.
+        }
     }
 
     @Nested
@@ -550,6 +734,144 @@ internal class ManifestVerificationHelperTest {
             )
 
             val parsedModules = listOf(parsedModule1, parsedModule2)
+
+            // When
+            manifestVerificationHelper.verify(parsedModules)
+
+            // Then
+            // No exception is thrown.
+        }
+
+        @Test
+        fun `Should NOT throw any exception when there is one duplicated class name but one version is ignored`() {
+
+            val parsedModule1 = ParsedModule(
+                name = "module1",
+                manifestList = listOf(
+                    ParsedManifest(
+                        path = "module1ManifestPath",
+                        packageName = "com.gaelmarhic.quadrant.module",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.module.Activity1",
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "quadrant",
+                                            value = "ignore"
+                                        )
+                                    )
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    )
+                )
+            )
+
+            val parsedModule2 = ParsedModule(
+                name = "module2",
+                manifestList = listOf(
+                    ParsedManifest(
+                        path = "module2ManifestPath",
+                        packageName = "com.gaelmarhic.quadrant.module",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.module.Activity1",
+                                    metaDataList = mutableListOf()
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    )
+                )
+            )
+
+            val parsedModules = listOf(parsedModule1, parsedModule2)
+
+            // When
+            manifestVerificationHelper.verify(parsedModules)
+
+            // Then
+            // No exception is thrown.
+        }
+
+        @Test
+        fun `Should NOT throw any exception when there are more than one duplicated class names but one version is ignored`() {
+
+            val parsedModule1 = ParsedModule(
+                name = "module1",
+                manifestList = listOf(
+                    ParsedManifest(
+                        path = "module1ManifestPath",
+                        packageName = "com.gaelmarhic.quadrant.module",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.module.Activity1",
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "quadrant",
+                                            value = "ignore"
+                                        )
+                                    )
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    )
+                )
+            )
+
+            val parsedModule2 = ParsedModule(
+                name = "module2",
+                manifestList = listOf(
+                    ParsedManifest(
+                        path = "module2ManifestPath",
+                        packageName = "com.gaelmarhic.quadrant.module",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.module.Activity1",
+                                    metaDataList = mutableListOf()
+                                ),
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.module.Activity2",
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "quadrant",
+                                            value = "ignore"
+                                        )
+                                    )
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    )
+                )
+            )
+
+            val parsedModule3 = ParsedModule(
+                name = "module3",
+                manifestList = listOf(
+                    ParsedManifest(
+                        path = "module3ManifestPath",
+                        packageName = "com.gaelmarhic.quadrant.module",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.module.Activity2",
+                                    metaDataList = mutableListOf()
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    )
+                )
+            )
+
+            val parsedModules = listOf(parsedModule1, parsedModule2, parsedModule3)
 
             // When
             manifestVerificationHelper.verify(parsedModules)
@@ -872,6 +1194,84 @@ internal class ManifestVerificationHelperTest {
                 )
 
                 val parsedModules = listOf(parsedModule1, parsedModule2)
+
+                // When
+                manifestVerificationHelper.verify(parsedModules)
+            }
+        }
+
+        @Test
+        fun `Should throw an exception when there are addressability conflicts in both application and an activity in one module but one version of the activity is ignored`() {
+
+            // Then
+            assertThrows<IllegalArgumentException> {
+
+                // Given
+                val parsedModule = ParsedModule(
+                    name = "module",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "manifest1Path",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = "com.gaelmarhic.quadrant.Activity1",
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "addressable",
+                                                value = "true"
+                                            ),
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    ),
+                                    Activity(
+                                        className = "com.gaelmarhic.quadrant.Activity2",
+                                        metaDataList = mutableListOf()
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "true"
+                                    )
+                                )
+                            )
+                        ),
+                        ParsedManifest(
+                            path = "manifest2Path",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = "com.gaelmarhic.quadrant.Activity1",
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "addressable",
+                                                value = "false"
+                                            )
+                                        )
+                                    ),
+                                    Activity(
+                                        className = "com.gaelmarhic.quadrant.Activity2",
+                                        metaDataList = mutableListOf()
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "false"
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+
+                val parsedModules = listOf(parsedModule)
 
                 // When
                 manifestVerificationHelper.verify(parsedModules)
@@ -1311,6 +1711,194 @@ internal class ManifestVerificationHelperTest {
             )
 
             val parsedModules = listOf(parsedModule)
+
+            // When
+            manifestVerificationHelper.verify(parsedModules)
+
+            // Then
+            // No exception is thrown.
+        }
+
+        @Test
+        fun `Should NOT throw any exception when there is an addressability conflict in an activity in one module but one version is ignored`() {
+
+            // Given
+            val parsedModule = ParsedModule(
+                name = "module",
+                manifestList = listOf(
+                    ParsedManifest(
+                        path = "manifest1Path",
+                        packageName = "com.gaelmarhic.quadrant",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Activity1",
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "addressable",
+                                            value = "true"
+                                        ),
+                                        MetaData(
+                                            name = "quadrant",
+                                            value = "ignore"
+                                        )
+                                    )
+                                ),
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Activity2",
+                                    metaDataList = mutableListOf()
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    ),
+                    ParsedManifest(
+                        path = "manifest2Path",
+                        packageName = "com.gaelmarhic.quadrant",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Activity1",
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "addressable",
+                                            value = "false"
+                                        )
+                                    )
+                                ),
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Activity2",
+                                    metaDataList = mutableListOf()
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    )
+                )
+            )
+
+            val parsedModules = listOf(parsedModule)
+
+            // When
+            manifestVerificationHelper.verify(parsedModules)
+
+            // Then
+            // No exception is thrown.
+        }
+
+        @Test
+        fun `Should NOT throw any exception when there are addressability conflicts in activities in different modules but one version is ignored`() {
+
+            // Given
+            val parsedModule1 = ParsedModule(
+                name = "module1",
+                manifestList = listOf(
+                    ParsedManifest(
+                        path = "module1Manifest1Path",
+                        packageName = "com.gaelmarhic.quadrant",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Module1Activity1",
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "addressable",
+                                            value = "true"
+                                        ),
+                                        MetaData(
+                                            name = "quadrant",
+                                            value = "ignore"
+                                        )
+                                    )
+                                ),
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Module1Activity2",
+                                    metaDataList = mutableListOf()
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    ),
+                    ParsedManifest(
+                        path = "module1Manifest2Path",
+                        packageName = "com.gaelmarhic.quadrant",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Module1Activity1",
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "addressable",
+                                            value = "false"
+                                        )
+                                    )
+                                ),
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Module1Activity2",
+                                    metaDataList = mutableListOf()
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    )
+                )
+            )
+
+            val parsedModule2 = ParsedModule(
+                name = "module2",
+                manifestList = listOf(
+                    ParsedManifest(
+                        path = "module2Manifest1Path",
+                        packageName = "com.gaelmarhic.quadrant",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Module2Activity1",
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "addressable",
+                                            value = "true"
+                                        )
+                                    )
+                                ),
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Module2Activity2",
+                                    metaDataList = mutableListOf()
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    ),
+                    ParsedManifest(
+                        path = "module2Manifest2Path",
+                        packageName = "com.gaelmarhic.quadrant",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Module2Activity1",
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "addressable",
+                                            value = "false"
+                                        ),
+                                        MetaData(
+                                            name = "quadrant",
+                                            value = "ignore"
+                                        )
+                                    )
+                                ),
+                                Activity(
+                                    className = "com.gaelmarhic.quadrant.Module2Activity2",
+                                    metaDataList = mutableListOf()
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    )
+                )
+            )
+
+            val parsedModules = listOf(parsedModule1, parsedModule2)
 
             // When
             manifestVerificationHelper.verify(parsedModules)

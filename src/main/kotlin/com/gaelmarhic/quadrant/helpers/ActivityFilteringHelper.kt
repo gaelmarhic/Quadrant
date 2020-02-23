@@ -1,5 +1,7 @@
 package com.gaelmarhic.quadrant.helpers
 
+import com.gaelmarhic.quadrant.constants.GeneralConstants.PLUGIN_NAME
+import com.gaelmarhic.quadrant.constants.Miscellaneous.IGNORE
 import com.gaelmarhic.quadrant.constants.ModelConstants.METADATA_NAME_ATTRIBUTE_ADDRESSABLE_VALUE
 import com.gaelmarhic.quadrant.extensions.QuadrantConfigurationExtension
 import com.gaelmarhic.quadrant.helpers.ActivityFilteringHelper.Addressability.*
@@ -42,6 +44,7 @@ class ActivityFilteringHelper(
     private fun List<ParsedManifest>.forEachActivity(block: (String, Boolean) -> Unit) =
         map { it.application }
             .flatMap { it.activityList }
+            .filterNot { it.metaDataList.hasIgnoreValue() }
             .groupBy { it.className }
             .forEach {
                 block(
@@ -84,6 +87,9 @@ class ActivityFilteringHelper(
             BOOLEAN_FALSE -> FALSE
             else -> UNDEFINED
         }
+
+    private fun List<MetaData>.hasIgnoreValue() =
+        find { it.name == PLUGIN_NAME.toLowerCase() && it.value == IGNORE } != null
 
     private enum class Addressability { TRUE, FALSE, UNDEFINED }
 }

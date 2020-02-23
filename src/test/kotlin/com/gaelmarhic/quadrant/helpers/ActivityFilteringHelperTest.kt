@@ -288,6 +288,179 @@ internal class ActivityFilteringHelperTest {
                 // Then
                 assertContainsClassName(filteredModules, activityClassName)
             }
+
+            @Test
+            fun `Then the activity should NOT have a constant when its unique version is ignored`() {
+
+                // Given
+                val activityClassName = "com.gaelmarhic.quadrant.Activity1"
+
+                val parsedModule = ParsedModule(
+                    name = "module",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "true"
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+
+                val parsedModules = listOf(parsedModule)
+
+                // When
+                val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+                // Then
+                assertDoesNotContainClassName(filteredModules, activityClassName)
+            }
+
+            @Test
+            fun `Then the activity should NOT have a constant when all of its versions are ignored`() {
+
+                // Given
+                val activityClassName = "com.gaelmarhic.quadrant.Activity1"
+
+                val parsedModule = ParsedModule(
+                    name = "module",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "true"
+                                    )
+                                )
+                            )
+                        ),
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "true"
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+
+                val parsedModules = listOf(parsedModule)
+
+                // When
+                val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+                // Then
+                assertDoesNotContainClassName(filteredModules, activityClassName)
+            }
+
+            @Test
+            fun `Then the activity should have a constant when NOT all of its versions are ignored`() {
+
+                // Given
+                val activityClassName = "com.gaelmarhic.quadrant.Activity1"
+
+                val parsedModule = ParsedModule(
+                    name = "module",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf()
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "true"
+                                    )
+                                )
+                            )
+                        ),
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "true"
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+
+                val parsedModules = listOf(parsedModule)
+
+                // When
+                val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+                // Then
+                assertContainsClassName(filteredModules, activityClassName)
+            }
         }
 
         @Nested
@@ -399,6 +572,179 @@ internal class ActivityFilteringHelperTest {
                                     Activity(
                                         className = activityClassName,
                                         metaDataList = mutableListOf()
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "false"
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+
+                val parsedModules = listOf(parsedModule)
+
+                // When
+                val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+                // Then
+                assertDoesNotContainClassName(filteredModules, activityClassName)
+            }
+
+            @Test
+            fun `Then the activity should NOT have a constant when its unique version is ignored`() {
+
+                // Given
+                val activityClassName = "com.gaelmarhic.quadrant.Activity1"
+
+                val parsedModule = ParsedModule(
+                    name = "module",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "false"
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+
+                val parsedModules = listOf(parsedModule)
+
+                // When
+                val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+                // Then
+                assertDoesNotContainClassName(filteredModules, activityClassName)
+            }
+
+            @Test
+            fun `Then the activity should NOT have a constant when all of its versions are ignored`() {
+
+                // Given
+                val activityClassName = "com.gaelmarhic.quadrant.Activity1"
+
+                val parsedModule = ParsedModule(
+                    name = "module",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "false"
+                                    )
+                                )
+                            )
+                        ),
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "false"
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+
+                val parsedModules = listOf(parsedModule)
+
+                // When
+                val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+                // Then
+                assertDoesNotContainClassName(filteredModules, activityClassName)
+            }
+
+            @Test
+            fun `Then the activity should NOT have a constant when NOT all of its versions are ignored`() {
+
+                // Given
+                val activityClassName = "com.gaelmarhic.quadrant.Activity1"
+
+                val parsedModule = ParsedModule(
+                    name = "module",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf()
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "false"
+                                    )
+                                )
+                            )
+                        ),
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
                                     )
                                 ),
                                 metaDataList = mutableListOf(
@@ -537,6 +883,154 @@ internal class ActivityFilteringHelperTest {
                 // Then
                 assertContainsClassName(filteredModules, activityClassName)
             }
+        }
+
+        @Test
+        fun `Then the activity should NOT have a constant when its unique version is ignored`() {
+
+            // Given
+            val activityClassName = "com.gaelmarhic.quadrant.Activity1"
+
+            val parsedModule = ParsedModule(
+                name = "module",
+                manifestList = listOf(
+                    ParsedManifest(
+                        path = "manifestPath",
+                        packageName = "com.gaelmarhic.quadrant",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = activityClassName,
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "quadrant",
+                                            value = "ignore"
+                                        )
+                                    )
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    )
+                )
+            )
+
+            val parsedModules = listOf(parsedModule)
+
+            // When
+            val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+            // Then
+            assertDoesNotContainClassName(filteredModules, activityClassName)
+        }
+
+        @Test
+        fun `Then the activity should NOT have a constant when all of its versions are ignored`() {
+
+            // Given
+            val activityClassName = "com.gaelmarhic.quadrant.Activity1"
+
+            val parsedModule = ParsedModule(
+                name = "module",
+                manifestList = listOf(
+                    ParsedManifest(
+                        path = "manifestPath",
+                        packageName = "com.gaelmarhic.quadrant",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = activityClassName,
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "quadrant",
+                                            value = "ignore"
+                                        )
+                                    )
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    ),
+                    ParsedManifest(
+                        path = "manifestPath",
+                        packageName = "com.gaelmarhic.quadrant",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = activityClassName,
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "quadrant",
+                                            value = "ignore"
+                                        )
+                                    )
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    )
+                )
+            )
+
+            val parsedModules = listOf(parsedModule)
+
+            // When
+            val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+            // Then
+            assertDoesNotContainClassName(filteredModules, activityClassName)
+        }
+
+        @Test
+        fun `Then the activity should have a constant when NOT all of its versions are ignored`() {
+
+            // Given
+            val activityClassName = "com.gaelmarhic.quadrant.Activity1"
+
+            val parsedModule = ParsedModule(
+                name = "module",
+                manifestList = listOf(
+                    ParsedManifest(
+                        path = "manifestPath",
+                        packageName = "com.gaelmarhic.quadrant",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = activityClassName,
+                                    metaDataList = mutableListOf()
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    ),
+                    ParsedManifest(
+                        path = "manifestPath",
+                        packageName = "com.gaelmarhic.quadrant",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = activityClassName,
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "quadrant",
+                                            value = "ignore"
+                                        )
+                                    )
+                                )
+                            ),
+                            metaDataList = mutableListOf()
+                        )
+                    )
+                )
+            )
+
+            val parsedModules = listOf(parsedModule)
+
+            // When
+            val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+            // Then
+            assertContainsClassName(filteredModules, activityClassName)
         }
     }
 
@@ -679,6 +1173,179 @@ internal class ActivityFilteringHelperTest {
                 // Then
                 assertContainsClassName(filteredModules, activityClassName)
             }
+
+            @Test
+            fun `Then the activity should NOT have a constant when its unique version is ignored`() {
+
+                // Given
+                val activityClassName = "com.gaelmarhic.quadrant.Activity1"
+
+                val parsedModule = ParsedModule(
+                    name = "module",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "true"
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+
+                val parsedModules = listOf(parsedModule)
+
+                // When
+                val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+                // Then
+                assertDoesNotContainClassName(filteredModules, activityClassName)
+            }
+
+            @Test
+            fun `Then the activity should NOT have a constant when all of its versions are ignored`() {
+
+                // Given
+                val activityClassName = "com.gaelmarhic.quadrant.Activity1"
+
+                val parsedModule = ParsedModule(
+                    name = "module",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "true"
+                                    )
+                                )
+                            )
+                        ),
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "true"
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+
+                val parsedModules = listOf(parsedModule)
+
+                // When
+                val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+                // Then
+                assertDoesNotContainClassName(filteredModules, activityClassName)
+            }
+
+            @Test
+            fun `Then the activity should have a constant when NOT all of its versions are ignored`() {
+
+                // Given
+                val activityClassName = "com.gaelmarhic.quadrant.Activity1"
+
+                val parsedModule = ParsedModule(
+                    name = "module",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf()
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "true"
+                                    )
+                                )
+                            )
+                        ),
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "true"
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+
+                val parsedModules = listOf(parsedModule)
+
+                // When
+                val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+                // Then
+                assertContainsClassName(filteredModules, activityClassName)
+            }
         }
 
         @Nested
@@ -811,6 +1478,179 @@ internal class ActivityFilteringHelperTest {
                 // Then
                 assertDoesNotContainClassName(filteredModules, activityClassName)
             }
+
+            @Test
+            fun `Then the activity should NOT have a constant when its unique version is ignored`() {
+
+                // Given
+                val activityClassName = "com.gaelmarhic.quadrant.Activity1"
+
+                val parsedModule = ParsedModule(
+                    name = "module",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "false"
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+
+                val parsedModules = listOf(parsedModule)
+
+                // When
+                val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+                // Then
+                assertDoesNotContainClassName(filteredModules, activityClassName)
+            }
+
+            @Test
+            fun `Then the activity should NOT have a constant when all of its versions are ignored`() {
+
+                // Given
+                val activityClassName = "com.gaelmarhic.quadrant.Activity1"
+
+                val parsedModule = ParsedModule(
+                    name = "module",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "false"
+                                    )
+                                )
+                            )
+                        ),
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "false"
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+
+                val parsedModules = listOf(parsedModule)
+
+                // When
+                val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+                // Then
+                assertDoesNotContainClassName(filteredModules, activityClassName)
+            }
+
+            @Test
+            fun `Then the activity should NOT have a constant when NOT all of its versions are ignored`() {
+
+                // Given
+                val activityClassName = "com.gaelmarhic.quadrant.Activity1"
+
+                val parsedModule = ParsedModule(
+                    name = "module",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf()
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "false"
+                                    )
+                                )
+                            )
+                        ),
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "false"
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+
+                val parsedModules = listOf(parsedModule)
+
+                // When
+                val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+                // Then
+                assertDoesNotContainClassName(filteredModules, activityClassName)
+            }
         }
 
         @Nested
@@ -912,6 +1752,154 @@ internal class ActivityFilteringHelperTest {
                                     Activity(
                                         className = activityClassName,
                                         metaDataList = mutableListOf()
+                                    )
+                                ),
+                                metaDataList = mutableListOf()
+                            )
+                        )
+                    )
+                )
+
+                val parsedModules = listOf(parsedModule)
+
+                // When
+                val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+                // Then
+                assertDoesNotContainClassName(filteredModules, activityClassName)
+            }
+
+            @Test
+            fun `Then the activity should NOT have a constant when its unique version is ignored`() {
+
+                // Given
+                val activityClassName = "com.gaelmarhic.quadrant.Activity1"
+
+                val parsedModule = ParsedModule(
+                    name = "module",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf()
+                            )
+                        )
+                    )
+                )
+
+                val parsedModules = listOf(parsedModule)
+
+                // When
+                val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+                // Then
+                assertDoesNotContainClassName(filteredModules, activityClassName)
+            }
+
+            @Test
+            fun `Then the activity should NOT have a constant when all of its versions are ignored`() {
+
+                // Given
+                val activityClassName = "com.gaelmarhic.quadrant.Activity1"
+
+                val parsedModule = ParsedModule(
+                    name = "module",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf()
+                            )
+                        ),
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf()
+                            )
+                        )
+                    )
+                )
+
+                val parsedModules = listOf(parsedModule)
+
+                // When
+                val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+                // Then
+                assertDoesNotContainClassName(filteredModules, activityClassName)
+            }
+
+            @Test
+            fun `Then the activity should NOT have a constant when NOT all of its versions are ignored`() {
+
+                // Given
+                val activityClassName = "com.gaelmarhic.quadrant.Activity1"
+
+                val parsedModule = ParsedModule(
+                    name = "module",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf()
+                                    )
+                                ),
+                                metaDataList = mutableListOf()
+                            )
+                        ),
+                        ParsedManifest(
+                            path = "manifestPath",
+                            packageName = "com.gaelmarhic.quadrant",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityClassName,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "quadrant",
+                                                value = "ignore"
+                                            )
+                                        )
                                     )
                                 ),
                                 metaDataList = mutableListOf()
