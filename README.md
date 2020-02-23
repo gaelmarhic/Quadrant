@@ -101,14 +101,14 @@ On the other hand, applying an addressable `<meta-data>` directly on an `<applic
 Here are a couple of examples with different combinations:
 
 #### Example 1
-`build.gradle`
+**build.gradle**
 ```groovy
 quadrantConfig {
     generateByDefault false
 }
 ```
 
-`AndroidManifest.xml`
+**AndroidManifest.xml**
 ````xml
 <application>
 
@@ -128,14 +128,14 @@ quadrantConfig {
 In this example, only the classname constant of the `MainActivity` will be generated.
 
 #### Example 2
-`build.gradle`
+**build.gradle**
 ```groovy
 quadrantConfig {
     generateByDefault true
 }
 ```
 
-`AndroidManifest.xml`
+**AndroidManifest.xml**
 ````xml
 <application>
 
@@ -176,7 +176,7 @@ If this occurs, you just have to paste the following snippet inside the `<activi
     android:value="ignore" />
 ```
 
-####Example
+#### Example
 
 ```xml
 <activity android:name="com.gaelmarhic.quadrant.MainActivity">
@@ -208,8 +208,6 @@ quadrantConfig {
 ```
 
 <img src="https://user-images.githubusercontent.com/16627604/75117768-b15bcd00-5674-11ea-8a46-16ec3db97162.png" width=300/>
-
-<br>
 
 License
 -------
