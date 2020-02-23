@@ -100,7 +100,7 @@ On the other hand, applying an addressable `<meta-data>` directly on an `<applic
 
 Here are a couple of examples with different combinations:
 
-####Example 1
+#### Example 1
 `build.gradle`
 ```groovy
 quadrantConfig {
@@ -127,7 +127,7 @@ quadrantConfig {
 
 In this example, only the classname constant of the `MainActivity` will be generated.
 
-####Example 2
+#### Example 2
 `build.gradle`
 ```groovy
 quadrantConfig {
