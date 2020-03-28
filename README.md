@@ -46,11 +46,11 @@ buildscript {
 
 and then apply it in the `build.gradle` file of one of your `Android` modules (`app` or `library`):
 
-If you are using a `Kotlin` script or prefer to use the `Plugins DSL`, please check [here](https://plugins.gradle.org/plugin/com.gaelmarhic.quadrant) how to do it.
-
 ```groovy
 apply plugin: "com.gaelmarhic.quadrant"
 ``` 
+
+If you are using a `Kotlin` script or prefer to use the `Plugins DSL`, please check [here](https://plugins.gradle.org/plugin/com.gaelmarhic.quadrant) how to do it.
 
 **ATTENTION**: It is strongly recommended to apply Quadrant to only one module of your project in order to not harm your build time. 
 As an example, you could create a `navigation` module which will contain all your navigation-related code.
