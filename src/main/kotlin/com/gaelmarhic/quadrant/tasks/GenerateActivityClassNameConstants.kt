@@ -27,7 +27,7 @@ open class GenerateActivityClassNameConstants : DefaultTask() {
     val buildScript = project.buildFile
 
     @InputFiles
-    val manifestFiles = rawModules?.flatMap { it.manifestFiles }
+    val manifestFiles = rawModules.flatMap { it.manifestFiles }
 
     @OutputDirectory
     val targetDirectory = project.buildDir.resolve(TARGET_DIRECTORY)
@@ -39,7 +39,7 @@ open class GenerateActivityClassNameConstants : DefaultTask() {
 
     @TaskAction
     fun generateConstants() {
-        rawModules?.let { processor.process(it) }
+        processor.process(rawModules)
     }
 
     private fun retrieveConfigurationExtension() =
@@ -47,9 +47,9 @@ open class GenerateActivityClassNameConstants : DefaultTask() {
 
     private fun retrieveRawModules() =
         project // This project is the project of the module where the plugin is applied.
-            .parent
-            ?.subprojects
-            ?.map { it.toRawModule() }
+            .rootProject
+            .allprojects
+            .map { it.toRawModule() }
 
     private fun Project.toRawModule() = RawModule(
         name = name,
