@@ -53,7 +53,7 @@ apply plugin: "com.gaelmarhic.quadrant"
 If you are using a `Kotlin` script or prefer to use the `Plugins DSL`, please check [here](https://plugins.gradle.org/plugin/com.gaelmarhic.quadrant) how to do it.
 
 **ATTENTION**: It is strongly recommended to apply Quadrant to only one module of your project in order to not harm your build time. 
-As an example, you could create a `navigation` module which will contain all your navigation-related code.
+As an example, you could create a `navigation` module which will contain all your navigation-related code and apply Quadrant only to that one.
 
 Prerequisites
 -------------
@@ -63,7 +63,7 @@ In order for Quadrant to work properly, your project's `AndroidManifest.xml` fil
 This implies that:
 - The classnames must be declared in an absolute way (`<activity android:name="com.gaelmarhic.quadrant.MainActivity">`) and not in a relative way (`<activity android:name=".MainActivity">`).
 - The package that is declared in the `<manifest>` tag must correspond to the package used in your `<activity>` tags.
-- You cannot have duplicated classnames across modules.
+- You cannot have duplicated `Activity` names.
 
 Addressability
 --------------
@@ -80,7 +80,7 @@ First of all, you can decide of an `Activity`'s addressability, and therefore wh
     android:value="true" />
 ```
 
-OR
+or
 
 ```xml
 <meta-data
@@ -168,7 +168,7 @@ In this example, only the classname constant of the `TertiaryActivity` will be g
 Ignoring `<activity>` tags
 ------------------------
 
-There may be some cases when you will want or need Quadrant to not take into account some `<activity>` tags. For example, this may happen with some third-party libraries that make you declare their `Activity` in your own `AndroidManifest.xml` files.
+There may be some cases when you will want or need Quadrant to not take into account some `<activity>` tags at all. For example, this may happen with some third-party libraries that make you declare their `Activity` in your own `AndroidManifest.xml` files.
 
 If this occurs, you just have to paste the following snippet inside the `<activity>` tag that you want or need to ignore:
 
