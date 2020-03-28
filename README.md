@@ -46,6 +46,8 @@ buildscript {
 
 and then apply it in the `build.gradle` file of one of your `Android` modules (`app` or `library`):
 
+If you are using a `Kotlin` script or prefer to use the `Plugins DSL`, please check [here](https://plugins.gradle.org/plugin/com.gaelmarhic.quadrant) how to do it.
+
 ```groovy
 apply plugin: "com.gaelmarhic.quadrant"
 ``` 
