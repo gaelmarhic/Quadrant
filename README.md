@@ -50,7 +50,28 @@ and then apply it in the `build.gradle` file of one of your `Android` modules (`
 apply plugin: "com.gaelmarhic.quadrant"
 ``` 
 
-If you are using a `Kotlin` script or prefer to use the `Plugins DSL`, please check [here](https://plugins.gradle.org/plugin/com.gaelmarhic.quadrant) how to do it.
+If you prefer to use the `Plugins DSL`, you have to edit your `settings.gradle`, first, and set the repositories where Gradle should resolve plugins from (needs to be at top of file):
+
+```groovy
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+    }
+}
+```
+
+This tells Gradle to resolve plugins from the Gradle plugin repo and from the Google maven repo. This is necessary, because Quadrant depends on the Android Gradle plugin, which can only be resolved from the latter one.
+
+Aftwards you can use the Quadrant plugin with:
+
+```groovy
+plugins {
+    id "com.gaelmarhic.quadrant" version "$version"
+}
+```
+
+
 
 **ATTENTION**: It is strongly recommended to apply Quadrant to only one module of your project in order to not harm your build time. 
 As an example, you could create a `navigation` module which will contain all your navigation-related code and apply Quadrant only to that one.
