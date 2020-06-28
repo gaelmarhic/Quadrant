@@ -165,7 +165,6 @@ class ManifestVerificationHelper {
             errorHolders.forEach { errorHolder ->
                 appendln()
                 append("$FILE: ${errorHolder.manifestFilePath}")
-                appendln()
                 errorHolder.classNames.forEachIndexed { index, className ->
                     appendln()
                     append("     ${index + 1})$className")
@@ -246,7 +245,7 @@ class ManifestVerificationHelper {
         private const val CANNOT_PROCEED_ERROR_MESSAGE = "$PLUGIN_NAME cannot proceed."
         private const val CLASS_NAME_FORMAT_ERROR_MESSAGE = """
             $CANNOT_PROCEED_ERROR_MESSAGE
-            For $PLUGIN_NAME to work, you must declare the ABSOLUTE class name of your activities in your manifest files (not the relative ones).
+            For $PLUGIN_NAME to work, you must declare the fully qualified class name of your activities in your manifest files, meaning that they should not start with ".".
                             
             Errors found in:
             """
