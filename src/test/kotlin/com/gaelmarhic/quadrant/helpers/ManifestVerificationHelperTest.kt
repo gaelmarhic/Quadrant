@@ -28,7 +28,6 @@ internal class ManifestVerificationHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifest1Path",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -45,7 +44,6 @@ internal class ManifestVerificationHelperTest {
                         ),
                         ParsedManifest(
                             path = "manifest2Path",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -82,7 +80,6 @@ internal class ManifestVerificationHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifest1Path",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -99,7 +96,6 @@ internal class ManifestVerificationHelperTest {
                         ),
                         ParsedManifest(
                             path = "manifest2Path",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -136,7 +132,6 @@ internal class ManifestVerificationHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifest1Path",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -153,7 +148,6 @@ internal class ManifestVerificationHelperTest {
                         ),
                         ParsedManifest(
                             path = "manifest2Path",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -179,7 +173,7 @@ internal class ManifestVerificationHelperTest {
         }
 
         @Test
-        fun `Should NOT throw any exception when all classnames and packages are fine in all manifests from all modules`() {
+        fun `Should NOT throw any exception when all classnames are fine in all manifests from all modules`() {
 
             // Given
             val parsedModule1 = ParsedModule(
@@ -187,7 +181,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "module1Manifest1Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -204,7 +197,6 @@ internal class ManifestVerificationHelperTest {
                     ),
                     ParsedManifest(
                         path = "module1Manifest2Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -227,7 +219,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "module2Manifest1Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -244,7 +235,6 @@ internal class ManifestVerificationHelperTest {
                     ),
                     ParsedManifest(
                         path = "module2Manifest2Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -280,7 +270,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "manifest1Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -302,7 +291,6 @@ internal class ManifestVerificationHelperTest {
                     ),
                     ParsedManifest(
                         path = "manifest2Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -338,7 +326,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "manifest1Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -365,7 +352,6 @@ internal class ManifestVerificationHelperTest {
                     ),
                     ParsedManifest(
                         path = "manifest2Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -401,7 +387,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "manifest1Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -423,7 +408,6 @@ internal class ManifestVerificationHelperTest {
                     ),
                     ParsedManifest(
                         path = "manifest2Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -470,7 +454,6 @@ internal class ManifestVerificationHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "module1ManifestPath",
-                            packageName = "com.gaelmarhic.quadrant.module",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -489,7 +472,6 @@ internal class ManifestVerificationHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "module2ManifestPath",
-                            packageName = "com.gaelmarhic.quadrant.module",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -521,7 +503,6 @@ internal class ManifestVerificationHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "module1ManifestPath",
-                            packageName = "com.gaelmarhic.quadrant.module",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -540,7 +521,6 @@ internal class ManifestVerificationHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "module2ManifestPath",
-                            packageName = "com.gaelmarhic.quadrant.module",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -563,7 +543,6 @@ internal class ManifestVerificationHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "module3ManifestPath",
-                            packageName = "com.gaelmarhic.quadrant.module",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -592,7 +571,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "module1ManifestPath",
-                        packageName = "com.gaelmarhic.quadrant.module1",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -611,7 +589,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "module2ManifestPath",
-                        packageName = "com.gaelmarhic.quadrant.module2",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -642,7 +619,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "module1ManifestPath",
-                        packageName = "com.gaelmarhic.quadrant.module",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -666,7 +642,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "module2ManifestPath",
-                        packageName = "com.gaelmarhic.quadrant.module",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -697,7 +672,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "module1ManifestPath",
-                        packageName = "com.gaelmarhic.quadrant.module",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -721,7 +695,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "module2ManifestPath",
-                        packageName = "com.gaelmarhic.quadrant.module",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -749,7 +722,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "module3ManifestPath",
-                        packageName = "com.gaelmarhic.quadrant.module",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -788,7 +760,6 @@ internal class ManifestVerificationHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifest1Path",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -810,7 +781,6 @@ internal class ManifestVerificationHelperTest {
                         ),
                         ParsedManifest(
                             path = "manifest2Path",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -852,7 +822,6 @@ internal class ManifestVerificationHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifest1Path",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -874,7 +843,6 @@ internal class ManifestVerificationHelperTest {
                         ),
                         ParsedManifest(
                             path = "manifest2Path",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -916,7 +884,6 @@ internal class ManifestVerificationHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifest1Path",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -943,7 +910,6 @@ internal class ManifestVerificationHelperTest {
                         ),
                         ParsedManifest(
                             path = "manifest2Path",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -990,7 +956,6 @@ internal class ManifestVerificationHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "module1Manifest1Path",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1012,7 +977,6 @@ internal class ManifestVerificationHelperTest {
                         ),
                         ParsedManifest(
                             path = "module1Manifest2Path",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1040,7 +1004,6 @@ internal class ManifestVerificationHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "module2Manifest1Path",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1062,7 +1025,6 @@ internal class ManifestVerificationHelperTest {
                         ),
                         ParsedManifest(
                             path = "module2Manifest2Path",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1104,7 +1066,6 @@ internal class ManifestVerificationHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifest1Path",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1135,7 +1096,6 @@ internal class ManifestVerificationHelperTest {
                         ),
                         ParsedManifest(
                             path = "manifest2Path",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1179,7 +1139,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "manifest1Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1201,7 +1160,6 @@ internal class ManifestVerificationHelperTest {
                     ),
                     ParsedManifest(
                         path = "manifest2Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1242,7 +1200,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "manifest1Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1264,7 +1221,6 @@ internal class ManifestVerificationHelperTest {
                     ),
                     ParsedManifest(
                         path = "manifest2Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1305,7 +1261,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "manifest1Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1327,7 +1282,6 @@ internal class ManifestVerificationHelperTest {
                     ),
                     ParsedManifest(
                         path = "manifest2Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1368,7 +1322,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "manifest1Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1385,7 +1338,6 @@ internal class ManifestVerificationHelperTest {
                     ),
                     ParsedManifest(
                         path = "manifest2Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1421,7 +1373,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "manifest1Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1443,7 +1394,6 @@ internal class ManifestVerificationHelperTest {
                     ),
                     ParsedManifest(
                         path = "manifest2Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1484,7 +1434,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "manifest1Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1506,7 +1455,6 @@ internal class ManifestVerificationHelperTest {
                     ),
                     ParsedManifest(
                         path = "manifest2Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1547,7 +1495,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "manifest1Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1574,7 +1521,6 @@ internal class ManifestVerificationHelperTest {
                     ),
                     ParsedManifest(
                         path = "manifest2Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1620,7 +1566,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "manifest1Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1646,7 +1591,6 @@ internal class ManifestVerificationHelperTest {
                     ),
                     ParsedManifest(
                         path = "manifest2Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1687,7 +1631,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "module1Manifest1Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1713,7 +1656,6 @@ internal class ManifestVerificationHelperTest {
                     ),
                     ParsedManifest(
                         path = "module1Manifest2Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1741,7 +1683,6 @@ internal class ManifestVerificationHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "module2Manifest1Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1763,7 +1704,6 @@ internal class ManifestVerificationHelperTest {
                     ),
                     ParsedManifest(
                         path = "module2Manifest2Path",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(

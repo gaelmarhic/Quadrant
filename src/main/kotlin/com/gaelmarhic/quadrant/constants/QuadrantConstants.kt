@@ -13,7 +13,6 @@ object GeneralConstants {
 object ModelConstants {
 
     const val MANIFEST_TAG = "manifest"
-    const val MANIFEST_PACKAGE_ATTRIBUTE = "package"
     const val APPLICATION_TAG = "application"
     const val ACTIVITY_TAG = "activity"
     const val ACTIVITY_NAME_ATTRIBUTE = "name"

@@ -23,13 +23,12 @@ class ManifestVerificationHelper {
         mutableListOf<ClassNameFormatErrorHolder>()
             .apply {
                 modules.forEach { (_, manifests) ->
-                    manifests.forEach { (path, packageName, application) ->
-                        application.findClassNameFormatErrors(packageName).let { classNameFormatErrors ->
+                    manifests.forEach { (path, application) ->
+                        application.findClassNameFormatErrors().let { classNameFormatErrors ->
                             if (classNameFormatErrors.isNotEmpty()) {
                                 add(
                                     ClassNameFormatErrorHolder(
                                         manifestFilePath = path,
-                                        declaredPackageName = packageName,
                                         classNames = classNameFormatErrors
                                     )
                                 )
@@ -44,7 +43,7 @@ class ManifestVerificationHelper {
             }
     }
 
-    private fun Application.findClassNameFormatErrors(packageName: String) =
+    private fun Application.findClassNameFormatErrors() =
         activityList
             .filterNot { it.metaDataList.hasIgnoreValue() }
             .filter { hasPartiallyQualifiedClassName(it.className) }
@@ -167,7 +166,6 @@ class ManifestVerificationHelper {
                 appendln()
                 append("$FILE: ${errorHolder.manifestFilePath}")
                 appendln()
-                append("$DECLARED_PACKAGE: ${errorHolder.declaredPackageName}")
                 errorHolder.classNames.forEachIndexed { index, className ->
                     appendln()
                     append("     ${index + 1})$className")
@@ -223,7 +221,6 @@ class ManifestVerificationHelper {
 
     private data class ClassNameFormatErrorHolder(
         val manifestFilePath: String,
-        val declaredPackageName: String,
         val classNames: List<String>
     )
 
@@ -242,7 +239,6 @@ class ManifestVerificationHelper {
         private const val MODULE = "Module"
         private const val MODULES = "Modules"
         private const val FILE = "File"
-        private const val DECLARED_PACKAGE = "Declared package"
         private const val APPLICATION_TAG = "Application tag"
         private const val CLASS_NAME = "Class name"
         private const val PACKAGE_SEPARATOR = "."

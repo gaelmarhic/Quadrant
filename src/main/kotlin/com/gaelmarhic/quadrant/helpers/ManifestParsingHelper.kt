@@ -30,7 +30,6 @@ class ManifestParsingHelper {
             .let {
                 ParsedManifest(
                     path = absolutePath,
-                    packageName = it.packageName,
                     application = it.application
                 )
             }

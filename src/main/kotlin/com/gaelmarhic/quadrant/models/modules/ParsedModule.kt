@@ -9,6 +9,5 @@ data class ParsedModule(
 
 data class ParsedManifest(
     val path: String,
-    val packageName: String,
     val application: Application
 )

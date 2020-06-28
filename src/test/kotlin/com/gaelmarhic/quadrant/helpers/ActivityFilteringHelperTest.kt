@@ -32,7 +32,6 @@ internal class ActivityFilteringHelperTest {
             manifestList = listOf(
                 ParsedManifest(
                     path = "module1ManifestPath",
-                    packageName = "com.gaelmarhic.quadrant",
                     application = Application(
                         activityList = mutableListOf(
                             Activity(
@@ -55,7 +54,6 @@ internal class ActivityFilteringHelperTest {
             manifestList = listOf(
                 ParsedManifest(
                     path = "module2ManifestPath",
-                    packageName = "com.gaelmarhic.quadrant",
                     application = Application(
                         activityList = mutableListOf(
                             Activity(
@@ -99,7 +97,6 @@ internal class ActivityFilteringHelperTest {
             manifestList = listOf(
                 ParsedManifest(
                     path = "module1ManifestPath",
-                    packageName = "com.gaelmarhic.quadrant",
                     application = Application(
                         activityList = mutableListOf(
                             Activity(
@@ -122,7 +119,6 @@ internal class ActivityFilteringHelperTest {
             manifestList = listOf(
                 ParsedManifest(
                     path = "module2ManifestPath",
-                    packageName = "com.gaelmarhic.quadrant",
                     application = Application(
                         activityList = mutableListOf(
                             Activity(
@@ -173,7 +169,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -217,7 +212,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -261,7 +255,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -300,7 +293,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -344,7 +336,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -367,7 +358,6 @@ internal class ActivityFilteringHelperTest {
                         ),
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -411,7 +401,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -429,7 +418,6 @@ internal class ActivityFilteringHelperTest {
                         ),
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -478,7 +466,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -522,7 +509,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -566,7 +552,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -605,7 +590,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -649,7 +633,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -672,7 +655,6 @@ internal class ActivityFilteringHelperTest {
                         ),
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -716,7 +698,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -734,7 +715,6 @@ internal class ActivityFilteringHelperTest {
                         ),
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -783,7 +763,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -822,7 +801,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -861,7 +839,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -896,7 +873,6 @@ internal class ActivityFilteringHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "manifestPath",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -935,7 +911,6 @@ internal class ActivityFilteringHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "manifestPath",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -953,7 +928,6 @@ internal class ActivityFilteringHelperTest {
                     ),
                     ParsedManifest(
                         path = "manifestPath",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -992,7 +966,6 @@ internal class ActivityFilteringHelperTest {
                 manifestList = listOf(
                     ParsedManifest(
                         path = "manifestPath",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1005,7 +978,6 @@ internal class ActivityFilteringHelperTest {
                     ),
                     ParsedManifest(
                         path = "manifestPath",
-                        packageName = "com.gaelmarhic.quadrant",
                         application = Application(
                             activityList = mutableListOf(
                                 Activity(
@@ -1058,7 +1030,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1102,7 +1073,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1146,7 +1116,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1185,7 +1154,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1229,7 +1197,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1252,7 +1219,6 @@ internal class ActivityFilteringHelperTest {
                         ),
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1296,7 +1262,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1314,7 +1279,6 @@ internal class ActivityFilteringHelperTest {
                         ),
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1363,7 +1327,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1407,7 +1370,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1451,7 +1413,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1490,7 +1451,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1534,7 +1494,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1557,7 +1516,6 @@ internal class ActivityFilteringHelperTest {
                         ),
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1601,7 +1559,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1619,7 +1576,6 @@ internal class ActivityFilteringHelperTest {
                         ),
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1668,7 +1624,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1707,7 +1662,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1746,7 +1700,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1780,7 +1733,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1819,7 +1771,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1837,7 +1788,6 @@ internal class ActivityFilteringHelperTest {
                         ),
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1876,7 +1826,6 @@ internal class ActivityFilteringHelperTest {
                     manifestList = listOf(
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(
@@ -1889,7 +1838,6 @@ internal class ActivityFilteringHelperTest {
                         ),
                         ParsedManifest(
                             path = "manifestPath",
-                            packageName = "com.gaelmarhic.quadrant",
                             application = Application(
                                 activityList = mutableListOf(
                                     Activity(

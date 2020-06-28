@@ -43,7 +43,6 @@ internal class ManifestParsingHelperTest {
             manifestList = listOf(
                 ParsedManifest(
                     path = File(module1ManifestPath).absolutePath,
-                    packageName = "com.gaelmarhic.quadrant",
                     application = Application(
                         activityList = mutableListOf(
                             Activity(
@@ -76,7 +75,6 @@ internal class ManifestParsingHelperTest {
             manifestList = listOf(
                 ParsedManifest(
                     path = File(module2ManifestPath).absolutePath,
-                    packageName = "com.gaelmarhic.quadrant",
                     application = Application(
                         activityList = mutableListOf(
                             Activity(
