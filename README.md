@@ -82,8 +82,7 @@ Prerequisites
 In order for Quadrant to work properly, your project's `AndroidManifest.xml` files must be declared in a Quadrant-suitable way.
 
 This implies that:
-- The classnames must be declared in an absolute way (`<activity android:name="com.gaelmarhic.quadrant.MainActivity">`) and not in a relative way (`<activity android:name=".MainActivity">`).
-- The package that is declared in the `<manifest>` tag must correspond to the package used in your `<activity>` tags.
+- The classnames must be declared in an fully qualified way (`<activity android:name="com.gaelmarhic.quadrant.MainActivity">`), meaning that they should not start with `.`
 - You cannot have duplicated `Activity` names.
 
 Addressability
