@@ -47,22 +47,11 @@ class ManifestVerificationHelper {
     private fun Application.findClassNameFormatErrors(packageName: String) =
         activityList
             .filterNot { it.metaDataList.hasIgnoreValue() }
-            .filter { !startsWithPackage(it.className, packageName) }
+            .filter { hasPartiallyQualifiedClassName(it.className) }
             .map { it.className }
             .distinct()
 
-    private fun startsWithPackage(className: String, packageName: String): Boolean {
-        val classNameSegments = className.split(PACKAGE_SEPARATOR)
-        val packageNameSegments = packageName.split(PACKAGE_SEPARATOR)
-        classNameSegments.forEachIndexed { index, classNameSegment ->
-            packageNameSegments.getOrNull(index)?.let { packageNameSegment ->
-                if (classNameSegment != packageNameSegment) {
-                    return false
-                }
-            }
-        }
-        return true
-    }
+    private fun hasPartiallyQualifiedClassName(className: String) = className.startsWith(PACKAGE_SEPARATOR)
 
     private fun verifyClassNameDuplication(modules: List<ParsedModule>) {
         mutableListOf<ClassNameDuplicationHolder>()
@@ -261,9 +250,7 @@ class ManifestVerificationHelper {
         private const val CANNOT_PROCEED_ERROR_MESSAGE = "$PLUGIN_NAME cannot proceed."
         private const val CLASS_NAME_FORMAT_ERROR_MESSAGE = """
             $CANNOT_PROCEED_ERROR_MESSAGE
-            For $PLUGIN_NAME to work, you must:
-            1) Declare the ABSOLUTE class name of your activities in your manifest files (not the relative ones).
-            2) Declare correctly the package attribute's value of the <manifest> tag in your manifest files. By "correctly", we mean that it must correspond to the actual package organisation of your module's folders. Any mismatch will cause $PLUGIN_NAME to fail.
+            For $PLUGIN_NAME to work, you must declare the ABSOLUTE class name of your activities in your manifest files (not the relative ones).
                             
             Errors found in:
             """
