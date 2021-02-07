@@ -10,12 +10,14 @@ import com.gaelmarhic.quadrant.models.manifest.MetaData
 import com.gaelmarhic.quadrant.models.modules.FilteredModule
 import com.gaelmarhic.quadrant.models.modules.ParsedManifest
 import com.gaelmarhic.quadrant.models.modules.ParsedModule
+import java.util.*
 import com.gaelmarhic.quadrant.constants.Miscellaneous.FALSE as BOOLEAN_FALSE
 import com.gaelmarhic.quadrant.constants.Miscellaneous.TRUE as BOOLEAN_TRUE
 
 class ActivityFilteringHelper(
     private val configurationExtension: QuadrantConfigurationExtension
 ) {
+    private val PACKAGE_SEPARATOR = "."
 
     fun filter(parsedModules: List<ParsedModule>) =
         parsedModules
@@ -23,6 +25,7 @@ class ActivityFilteringHelper(
 
     private fun ParsedModule.applyFilter() =
         manifestList
+            .generateFullyQualifiedClassNames()
             .filterClassNames()
             .takeIf { it.isNotEmpty() }
             ?.let { classNames ->
@@ -55,6 +58,24 @@ class ActivityFilteringHelper(
                     )
                 )
             }
+
+    private fun List<ParsedManifest>.generateFullyQualifiedClassNames(): List<ParsedManifest> {
+        val ans = LinkedList<ParsedManifest>()
+
+        for ((path, application, packageName) in this) {
+            val activityList = application.activityList.map {
+                val className = createFullyQualifiedClassName(packageName, it.className)
+                Activity(className, it.metaDataList)
+            }.toMutableList()
+            ans.add(ParsedManifest(path, application.copy(activityList = activityList), packageName))
+        }
+
+        return ans
+    }
+
+    private fun createFullyQualifiedClassName(packageName: String, className: String): String {
+        return if (className.startsWith(PACKAGE_SEPARATOR)) packageName + className else className
+    }
 
     private fun isActivityAddressable(
         activityAddressability: Addressability,
