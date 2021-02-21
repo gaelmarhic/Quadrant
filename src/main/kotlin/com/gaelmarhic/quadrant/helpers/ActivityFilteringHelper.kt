@@ -39,7 +39,7 @@ class ActivityFilteringHelper(
             val className = createFullyQualifiedClassName(manifest.packageName, activity.className)
             Activity(className, activity.metaDataList)
         }.toMutableList()
-        val application = manifest.application.copy(activityList)
+        val application = manifest.application.copy(activityList = activityList)
         ParsedManifest(manifest.path, application, manifest.packageName)
     }
 
