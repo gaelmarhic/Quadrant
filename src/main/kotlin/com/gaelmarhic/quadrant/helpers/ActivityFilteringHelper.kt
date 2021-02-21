@@ -11,7 +11,6 @@ import com.gaelmarhic.quadrant.models.manifest.MetaData
 import com.gaelmarhic.quadrant.models.modules.FilteredModule
 import com.gaelmarhic.quadrant.models.modules.ParsedManifest
 import com.gaelmarhic.quadrant.models.modules.ParsedModule
-import java.util.*
 import com.gaelmarhic.quadrant.constants.Miscellaneous.FALSE as BOOLEAN_FALSE
 import com.gaelmarhic.quadrant.constants.Miscellaneous.TRUE as BOOLEAN_TRUE
 
