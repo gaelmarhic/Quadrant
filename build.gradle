@@ -34,7 +34,7 @@ compileTestKotlin {
 }
 
 group = "com.gaelmarhic"
-version = "1.4"
+version = "1.5"
 
 uploadArchives {
     repositories {
