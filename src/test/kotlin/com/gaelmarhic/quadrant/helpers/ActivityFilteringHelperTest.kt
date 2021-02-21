@@ -146,11 +146,11 @@ internal class ActivityFilteringHelperTest {
     }
 
     @Nested
-    @DisplayName("When parsing a manifest file")
+    @DisplayName("When formatting class names")
     inner class ClassNameFormat {
 
         @Test
-        fun `Then activity defined with FQCN should be mapped to FQCN generated constant`() {
+        fun `Then activity defined with FQCN should be mapped to FQCN`() {
 
             // Given
             val activityFqcn = "com.gaelmarhic.quadrant.Activity"
@@ -178,7 +178,8 @@ internal class ActivityFilteringHelperTest {
                                     value = "true"
                                 )
                             )
-                        )
+                        ),
+                        packageName = "com.gaelmarhic.quadrant"
                     )
                 )
             )
@@ -193,7 +194,7 @@ internal class ActivityFilteringHelperTest {
         }
 
         @Test
-        fun `Then activity defined with PQCN should be mapped to FQCN generated constant`() {
+        fun `Then activity defined with PQCN should be mapped to FQCN`() {
 
             // Given
             val manifestPackageName = "com.gaelmarhic.quadrant"
