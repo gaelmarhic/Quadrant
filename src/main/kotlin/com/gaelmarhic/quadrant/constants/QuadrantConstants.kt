@@ -29,4 +29,7 @@ object Miscellaneous {
     const val TRUE = "true"
     const val FALSE = "false"
     const val IGNORE = "ignore"
+
+    const val EMPTY_SEPARATOR = ""
+    const val PACKAGE_SEPARATOR = "."
 }

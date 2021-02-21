@@ -76,13 +76,7 @@ plugins {
 **ATTENTION**: It is strongly recommended to apply Quadrant to only one module of your project in order to not harm your build time. 
 As an example, you could create a `navigation` module which will contain all your navigation-related code and apply Quadrant only to that one.
 
-Prerequisites
--------------
-
-In order for Quadrant to work properly, your project's `AndroidManifest.xml` files must be declared in a Quadrant-suitable way.
-
-This implies that:
-- You cannot have duplicated `Activity` names.
+In order for Quadrant to work properly, by default there must be no duplicated Activity names across the project. However there is an option to allow names duplication across modules for multi-module apps; check gradle flag `quadrantConfig.perModule`
 
 Addressability
 --------------
