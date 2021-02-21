@@ -1,6 +1,8 @@
 package com.gaelmarhic.quadrant.helpers
 
 import com.gaelmarhic.quadrant.constants.GeneralConstants.PLUGIN_NAME
+import com.gaelmarhic.quadrant.constants.Miscellaneous.EMPTY_SEPARATOR
+import com.gaelmarhic.quadrant.constants.Miscellaneous.PACKAGE_SEPARATOR
 import com.gaelmarhic.quadrant.extensions.QuadrantConfigurationExtension
 import com.gaelmarhic.quadrant.models.generation.ConstantToBeGenerated
 import com.gaelmarhic.quadrant.models.generation.FileToBeGenerated
@@ -58,7 +60,5 @@ class ConstantFileDeterminationHelper(
     companion object {
 
         private const val SINGLE_FILE_NAME = "${PLUGIN_NAME}Constants"
-        private const val PACKAGE_SEPARATOR = "."
-        private const val EMPTY_SEPARATOR = ""
     }
 }

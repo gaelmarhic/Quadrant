@@ -14,43 +14,9 @@ import com.gaelmarhic.quadrant.models.modules.ParsedModule
 class ManifestVerificationHelper {
 
     fun verify(parsedModules: List<ParsedModule>) {
-        verifyClassNameFormat(parsedModules)
         verifyClassNameDuplication(parsedModules)
         verifyAddressableMetaDatas(parsedModules)
     }
-
-    private fun verifyClassNameFormat(modules: List<ParsedModule>) {
-        mutableListOf<ClassNameFormatErrorHolder>()
-            .apply {
-                modules.forEach { (_, manifests) ->
-                    manifests.forEach { (path, application) ->
-                        application.findClassNameFormatErrors().let { classNameFormatErrors ->
-                            if (classNameFormatErrors.isNotEmpty()) {
-                                add(
-                                    ClassNameFormatErrorHolder(
-                                        manifestFilePath = path,
-                                        classNames = classNameFormatErrors
-                                    )
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-            .ifNotEmptyThrow { errorHolders ->
-                val formattedMessage = formatClassNameFormatErrorMessage(errorHolders)
-                IllegalStateException(formattedMessage)
-            }
-    }
-
-    private fun Application.findClassNameFormatErrors() =
-        activityList
-            .filterNot { it.metaDataList.hasIgnoreValue() }
-            .filter { hasPartiallyQualifiedClassName(it.className) }
-            .map { it.className }
-            .distinct()
-
-    private fun hasPartiallyQualifiedClassName(className: String) = className.startsWith(PACKAGE_SEPARATOR)
 
     private fun verifyClassNameDuplication(modules: List<ParsedModule>) {
         mutableListOf<ClassNameDuplicationHolder>()
@@ -158,21 +124,6 @@ class ManifestVerificationHelper {
             .toList()
             .containsAll(listOf(true, false))
 
-    private fun formatClassNameFormatErrorMessage(errorHolders: List<ClassNameFormatErrorHolder>) =
-        StringBuilder().apply {
-            append(CLASS_NAME_FORMAT_ERROR_MESSAGE.trimIndent())
-            appendln()
-            errorHolders.forEach { errorHolder ->
-                appendln()
-                append("$FILE: ${errorHolder.manifestFilePath}")
-                errorHolder.classNames.forEachIndexed { index, className ->
-                    appendln()
-                    append("     ${index + 1})$className")
-                }
-                appendln()
-            }
-        }.toString()
-
     private fun formatClassNameDuplicationMessage(duplicationHolders: List<ClassNameDuplicationHolder>) =
         StringBuilder().apply {
             append(CLASS_NAME_DUPLICATION_MESSAGE.trimIndent())
@@ -218,11 +169,6 @@ class ManifestVerificationHelper {
 
     private fun <T> T?.wrapIntoList() = if (this != null) listOf(this) else emptyList()
 
-    private data class ClassNameFormatErrorHolder(
-        val manifestFilePath: String,
-        val classNames: List<String>
-    )
-
     private data class ClassNameDuplicationHolder(
         val className: String,
         val modules: List<String>
@@ -237,18 +183,10 @@ class ManifestVerificationHelper {
 
         private const val MODULE = "Module"
         private const val MODULES = "Modules"
-        private const val FILE = "File"
         private const val APPLICATION_TAG = "Application tag"
         private const val CLASS_NAME = "Class name"
-        private const val PACKAGE_SEPARATOR = "."
         private const val DISPLAY_SEPARATOR = ", "
         private const val CANNOT_PROCEED_ERROR_MESSAGE = "$PLUGIN_NAME cannot proceed."
-        private const val CLASS_NAME_FORMAT_ERROR_MESSAGE = """
-            $CANNOT_PROCEED_ERROR_MESSAGE
-            For $PLUGIN_NAME to work, you must declare the fully qualified class name of your activities in your manifest files, meaning that they should not start with ".".
-                            
-            Errors found in:
-            """
         private const val CLASS_NAME_DUPLICATION_MESSAGE = """
             $CANNOT_PROCEED_ERROR_MESSAGE
             You have duplicated class names across different modules.

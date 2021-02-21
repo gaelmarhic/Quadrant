@@ -146,6 +146,100 @@ internal class ActivityFilteringHelperTest {
     }
 
     @Nested
+    @DisplayName("When parsing a manifest file")
+    inner class ClassNameFormat {
+
+        @Test
+        fun `Then activity defined with FQCN should be mapped to FQCN generated constant`() {
+
+            // Given
+            val activityFqcn = "com.gaelmarhic.quadrant.Activity"
+
+            val parsedModule = ParsedModule(
+                name = "module",
+                manifestList = listOf(
+                    ParsedManifest(
+                        path = "manifestPath",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = activityFqcn,
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "addressable",
+                                            value = "true"
+                                        )
+                                    )
+                                )
+                            ),
+                            metaDataList = mutableListOf(
+                                MetaData(
+                                    name = "addressable",
+                                    value = "true"
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+
+            val parsedModules = listOf(parsedModule)
+
+            // When
+            val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+            // Then
+            assertContainsClassName(filteredModules, activityFqcn)
+        }
+
+        @Test
+        fun `Then activity defined with PQCN should be mapped to FQCN generated constant`() {
+
+            // Given
+            val manifestPackageName = "com.gaelmarhic.quadrant"
+            val activityPqcn = ".Activity"
+            val activityFqcn = manifestPackageName + activityPqcn
+
+            val parsedModule = ParsedModule(
+                name = "module",
+                manifestList = listOf(
+                    ParsedManifest(
+                        path = "manifestPath",
+                        application = Application(
+                            activityList = mutableListOf(
+                                Activity(
+                                    className = activityPqcn,
+                                    metaDataList = mutableListOf(
+                                        MetaData(
+                                            name = "addressable",
+                                            value = "true"
+                                        )
+                                    )
+                                )
+                            ),
+                            metaDataList = mutableListOf(
+                                MetaData(
+                                    name = "addressable",
+                                    value = "true"
+                                )
+                            )
+                        ),
+                        packageName = manifestPackageName
+                    )
+                )
+            )
+
+            val parsedModules = listOf(parsedModule)
+
+            // When
+            val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+            // Then
+            assertContainsClassName(filteredModules, activityFqcn)
+        }
+    }
+
+    @Nested
     @DisplayName("When the configuration is set to generate constants by default")
     inner class GenerateByDefault {
 

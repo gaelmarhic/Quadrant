@@ -2,6 +2,7 @@ package com.gaelmarhic.quadrant.helpers
 
 import com.gaelmarhic.quadrant.constants.GeneralConstants.PLUGIN_NAME
 import com.gaelmarhic.quadrant.constants.Miscellaneous.IGNORE
+import com.gaelmarhic.quadrant.constants.Miscellaneous.PACKAGE_SEPARATOR
 import com.gaelmarhic.quadrant.constants.ModelConstants.METADATA_NAME_ATTRIBUTE_ADDRESSABLE_VALUE
 import com.gaelmarhic.quadrant.extensions.QuadrantConfigurationExtension
 import com.gaelmarhic.quadrant.helpers.ActivityFilteringHelper.Addressability.*
@@ -10,6 +11,7 @@ import com.gaelmarhic.quadrant.models.manifest.MetaData
 import com.gaelmarhic.quadrant.models.modules.FilteredModule
 import com.gaelmarhic.quadrant.models.modules.ParsedManifest
 import com.gaelmarhic.quadrant.models.modules.ParsedModule
+import java.util.*
 import com.gaelmarhic.quadrant.constants.Miscellaneous.FALSE as BOOLEAN_FALSE
 import com.gaelmarhic.quadrant.constants.Miscellaneous.TRUE as BOOLEAN_TRUE
 
@@ -23,6 +25,7 @@ class ActivityFilteringHelper(
 
     private fun ParsedModule.applyFilter() =
         manifestList
+            .generateFullyQualifiedClassNames()
             .filterClassNames()
             .takeIf { it.isNotEmpty() }
             ?.let { classNames ->
@@ -31,6 +34,19 @@ class ActivityFilteringHelper(
                     filteredClassNameList = classNames
                 )
             }
+
+    private fun List<ParsedManifest>.generateFullyQualifiedClassNames() = map { manifest ->
+        val activityList = manifest.application.activityList.map { activity ->
+            val className = createFullyQualifiedClassName(manifest.packageName, activity.className)
+            Activity(className, activity.metaDataList)
+        }.toMutableList()
+        val application = manifest.application.copy(activityList)
+        ParsedManifest(manifest.path, application, manifest.packageName)
+    }
+
+    private fun createFullyQualifiedClassName(packageName: String, className: String): String {
+        return if (className.startsWith(PACKAGE_SEPARATOR)) packageName + className else className
+    }
 
     private fun List<ParsedManifest>.filterClassNames() =
         mutableListOf<String>().apply {
