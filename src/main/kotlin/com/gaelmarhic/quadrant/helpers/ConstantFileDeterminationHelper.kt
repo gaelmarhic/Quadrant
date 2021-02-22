@@ -1,12 +1,14 @@
 package com.gaelmarhic.quadrant.helpers
 
 import com.gaelmarhic.quadrant.constants.GeneralConstants.PLUGIN_NAME
+import com.gaelmarhic.quadrant.constants.Miscellaneous.CLASS_NAME_SEPARATOR
 import com.gaelmarhic.quadrant.constants.Miscellaneous.EMPTY_SEPARATOR
 import com.gaelmarhic.quadrant.constants.Miscellaneous.PACKAGE_SEPARATOR
 import com.gaelmarhic.quadrant.extensions.QuadrantConfigurationExtension
 import com.gaelmarhic.quadrant.models.generation.ConstantToBeGenerated
 import com.gaelmarhic.quadrant.models.generation.FileToBeGenerated
 import com.gaelmarhic.quadrant.models.modules.FilteredModule
+import java.util.*
 
 class ConstantFileDeterminationHelper(
     private val configurationExtension: QuadrantConfigurationExtension
@@ -48,11 +50,14 @@ class ConstantFileDeterminationHelper(
         value = this
     )
 
-    private fun String.formatConstantName() =
+    private fun String.formatConstantName() = if (configurationExtension.packageNamespaceEnabled) {
+        replace(PACKAGE_SEPARATOR, CLASS_NAME_SEPARATOR, true)
+    } else {
         split(PACKAGE_SEPARATOR)
             .last()
             .mapIndexed { index, letter -> formatLetter(index, letter) }
             .joinToString(EMPTY_SEPARATOR)
+    }
 
     private fun formatLetter(index: Int, letter: Char) =
         if (letter.isUpperCase() && index != 0) "_$letter" else letter.toUpperCase().toString()
