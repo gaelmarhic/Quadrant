@@ -12,7 +12,9 @@ import org.junit.jupiter.api.Test
 
 internal class ConstantFileDeterminationHelperTest {
 
-    private val configurationExtension = QuadrantConfigurationExtension()
+    private val configurationExtension = QuadrantConfigurationExtension().apply {
+        namespaceEnabled = true
+    }
 
     private val constantFileDeterminationHelper = ConstantFileDeterminationHelper(
         configurationExtension = configurationExtension

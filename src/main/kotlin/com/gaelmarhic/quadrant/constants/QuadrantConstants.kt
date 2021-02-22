@@ -32,4 +32,5 @@ object Miscellaneous {
 
     const val EMPTY_SEPARATOR = ""
     const val PACKAGE_SEPARATOR = "."
+    const val CLASS_NAME_SEPARATOR = "_"
 }

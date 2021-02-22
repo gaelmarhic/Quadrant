@@ -10,11 +10,11 @@ There is no magic here. Quadrant simply parses your entire project's `AndroidMan
 ```kotlin
 object QuadrantConstants {
   
-  const val MAIN_ACTIVITY: String = "com.gaelmarhic.quadrant.MainActivity"
+  const val com_gaelmarhic_quadrant_MainActivity: String = "com.gaelmarhic.quadrant.MainActivity"
 
-  const val SECONDARY_ACTIVITY: String = "com.gaelmarhic.quadrant.SecondaryActivity"
+  const val com_gaelmarhic_quadrant_SecondaryActivity: String = "com.gaelmarhic.quadrant.SecondaryActivity"
 
-  const val TERTIARY_ACTIVITY: String = "com.gaelmarhic.quadrant.TertiaryActivity"
+  const val com_gaelmarhic_quadrant_TertiaryActivity: String = "com.gaelmarhic.quadrant.TertiaryActivity"
 }
 ```
 
@@ -22,7 +22,7 @@ This way you do not need any direct dependency to any `Activity` class inside of
 
 ```kotlin
 val intent = Intent()
-intent.setClassName(context, QuadrantConstants.MAIN_ACTIVITY)
+intent.setClassName(context, QuadrantConstants.com_gaelmarhic_quadrant_MainActivity)
 startActivity(intent)
 ``` 
 
