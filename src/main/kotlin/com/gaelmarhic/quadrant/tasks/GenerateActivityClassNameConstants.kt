@@ -1,6 +1,5 @@
 package com.gaelmarhic.quadrant.tasks
 
-import com.gaelmarhic.quadrant.constants.GeneralConstants.PLUGIN_CONFIG
 import com.gaelmarhic.quadrant.constants.GeneralConstants.PLUGIN_NAME
 import com.gaelmarhic.quadrant.extensions.QuadrantConfigurationExtension
 import com.gaelmarhic.quadrant.helpers.*
@@ -10,12 +9,14 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.ListProperty
+import org.gradle.api.provider.Property
 import org.gradle.api.tasks.*
 import java.io.File
 
 abstract class GenerateActivityClassNameConstants : DefaultTask() {
 
-    private val configurationExtension = retrieveConfigurationExtension()
+    @get:Nested
+    abstract val configurationExtension: Property<QuadrantConfigurationExtension>
 
     @get:InputFile
     abstract val buildScript: RegularFileProperty
@@ -39,17 +40,14 @@ abstract class GenerateActivityClassNameConstants : DefaultTask() {
         initProcessor().process(rawModules.get())
     }
 
-    private fun retrieveConfigurationExtension() =
-        project.extensions.findByName(PLUGIN_CONFIG) as QuadrantConfigurationExtension
-
     private fun initProcessor() = GenerateActivityClassNameConstantProcessor(
         manifestParsingHelper = ManifestParsingHelper(),
         manifestVerificationHelper = ManifestVerificationHelper(),
         activityFilteringHelper = ActivityFilteringHelper(
-            configurationExtension = configurationExtension
+            configurationExtension = configurationExtension.get()
         ),
         constantFileDeterminationHelper = ConstantFileDeterminationHelper(
-            configurationExtension = configurationExtension
+            configurationExtension = configurationExtension.get()
         ),
         constantGenerationHelper = ConstantGenerationHelper(targetDirectory.get().asFile)
     )

@@ -39,13 +39,8 @@ class QuadrantPlugin : Plugin<Project> {
         val variants = block(extension)
         val mainSourceSet = extension.sourceSet(MAIN_SOURCE_SET)
 
-        registerConfigurationExtension()
         registerTask(createGenerateActivityClassNameConstantsTask(), variants)
         addTargetDirectoryToSourceSet(mainSourceSet)
-    }
-
-    private fun Project.registerConfigurationExtension() {
-        extensions.create(PLUGIN_CONFIG, QuadrantConfigurationExtension::class.java)
     }
 
     private fun <V : BaseVariant> Project.registerTask(
@@ -76,9 +71,11 @@ class QuadrantPlugin : Plugin<Project> {
     private fun Project.createGenerateActivityClassNameConstantsTask(): Task {
         val taskType = GenerateActivityClassNameConstants::class.java
         val taskName = taskType.simpleName.decapitalize()
+        val extension = registerConfigurationExtension()
         return tasks.create(taskName, taskType) { task ->
             val rawModuleList = retrieveRawModuleList(this)
             task.apply {
+                configurationExtension.set(extension)
                 buildScript.set(buildFile)
                 manifestFiles.set(rawModuleList.flatMap { it.manifestFiles })
                 targetDirectory.set(buildDir.resolve(TARGET_DIRECTORY))
@@ -86,6 +83,9 @@ class QuadrantPlugin : Plugin<Project> {
             }
         }
     }
+
+    private fun Project.registerConfigurationExtension() =
+        extensions.create(PLUGIN_CONFIG, QuadrantConfigurationExtension::class.java)
 
     private fun retrieveRawModuleList(project: Project) =
         project // This project is the project of the module where the plugin is applied.
