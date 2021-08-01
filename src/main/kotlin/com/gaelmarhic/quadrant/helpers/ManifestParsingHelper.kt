@@ -11,7 +11,7 @@ import java.io.File
 
 class ManifestParsingHelper {
 
-    private val xmlMapper by lazy { initXmlMapper() }
+    private val xmlMapper = initXmlMapper()
 
     fun parse(rawModules: List<RawModule>) =
         rawModules

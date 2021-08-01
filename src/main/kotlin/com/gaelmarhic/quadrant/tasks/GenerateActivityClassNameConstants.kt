@@ -17,11 +17,11 @@ import java.io.File
 
 open class GenerateActivityClassNameConstants : DefaultTask() {
 
-    private val configurationExtension by lazy { retrieveConfigurationExtension() }
+    private val configurationExtension = retrieveConfigurationExtension()
 
-    private val rawModules by lazy { retrieveRawModules() }
+    private val rawModules = retrieveRawModules()
 
-    private val processor by lazy { initProcessor() }
+    private val processor = initProcessor()
 
     @InputFile
     val buildScript = project.buildFile
