@@ -6,6 +6,7 @@ import com.android.build.gradle.api.BaseVariant
 import com.gaelmarhic.quadrant.constants.GeneralConstants.PLUGIN_CONFIG
 import com.gaelmarhic.quadrant.constants.GeneralConstants.TARGET_DIRECTORY
 import com.gaelmarhic.quadrant.extensions.QuadrantConfigurationExtension
+import com.gaelmarhic.quadrant.models.modules.RawModule
 import com.gaelmarhic.quadrant.tasks.GenerateActivityClassNameConstants
 import org.gradle.api.DomainObjectCollection
 import org.gradle.api.Plugin
@@ -39,7 +40,7 @@ class QuadrantPlugin : Plugin<Project> {
         val mainSourceSet = extension.sourceSet(MAIN_SOURCE_SET)
 
         registerConfigurationExtension()
-        registerTask(createTask(GenerateActivityClassNameConstants::class.java), variants)
+        registerTask(createGenerateActivityClassNameConstantsTask(), variants)
         addTargetDirectoryToSourceSet(mainSourceSet)
     }
 
@@ -72,10 +73,37 @@ class QuadrantPlugin : Plugin<Project> {
         return getByType(type.java)
     }
 
-    private fun <T : Task> Project.createTask(taskType: Class<T>): Task {
+    private fun Project.createGenerateActivityClassNameConstantsTask(): Task {
+        val taskType = GenerateActivityClassNameConstants::class.java
         val taskName = taskType.simpleName.decapitalize()
-        return tasks.create(taskName, taskType)
+        return tasks.create(taskName, taskType) { task ->
+            val rawModuleList = retrieveRawModuleList(this)
+            task.apply {
+                buildScript.set(buildFile)
+                manifestFiles.set(rawModuleList.flatMap { it.manifestFiles })
+                targetDirectory.set(buildDir.resolve(TARGET_DIRECTORY))
+                rawModules.set(rawModuleList)
+            }
+        }
     }
+
+    private fun retrieveRawModuleList(project: Project) =
+        project // This project is the project of the module where the plugin is applied.
+            .rootProject
+            .allprojects
+            .map { it.toRawModule() }
+
+    private fun Project.toRawModule() = RawModule(
+        name = name,
+        manifestFiles = manifestFiles
+    )
+
+    private val Project.manifestFiles: List<File>
+        get() = projectDir
+            .walk()
+            .maxDepth(MANIFEST_FILE_DEPTH)
+            .filter { it.name == MANIFEST_FILE_NAME }
+            .toList()
 
     private fun BaseExtension.sourceSet(name: String) = sourceSets.getByName(name)
 
@@ -85,5 +113,7 @@ class QuadrantPlugin : Plugin<Project> {
     companion object {
 
         private const val MAIN_SOURCE_SET = "main"
+        private const val MANIFEST_FILE_DEPTH = 3
+        private const val MANIFEST_FILE_NAME = "AndroidManifest.xml"
     }
 }
