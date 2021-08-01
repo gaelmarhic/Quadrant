@@ -241,7 +241,7 @@ For some reason, in that case, `Gradle's Configuration Cache` may make the build
 
 In order to overcome this issue, you simply need to invalidate that cache manually by running:
 ```
- rm -rf .gradle/configuration-cache
+rm -rf .gradle/configuration-cache
 ```
 
 License
