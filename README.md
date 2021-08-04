@@ -227,23 +227,6 @@ quadrantConfig {
 
 <img src="https://user-images.githubusercontent.com/16627604/75117768-b15bcd00-5674-11ea-8a46-16ec3db97162.png" width=300/>
 
-Troubleshooting
------------------
-
-If you modify `Quadrant`'s configuration, in any of your `build.gradle` files where it is applied, when having `Gradle's Configuration Cache` enabled and rebuild, you may sometimes get an error similar to this one:
-```
-> Task :app:compileDebugKotlin FAILED
-e: Source file or directory not found: /Users/MyUser/Desktop/MyApp/app/build/generated/source/quadrant/com/gaelmarhic/quadrant/QuadrantConfig.kt
-```
-
-This happens because, depending on the configuration you have modified, `Quadrant` may not generate anymore some files that were previously generated.
-For some reason, in that case, `Gradle's Configuration Cache` may make the build fail.
-
-In order to overcome this issue, you simply need to invalidate that cache manually by running:
-```
-rm -rf .gradle/configuration-cache
-```
-
 License
 -------
 
