@@ -1,36 +1,34 @@
 package com.gaelmarhic.quadrant.tasks
 
-import com.gaelmarhic.quadrant.constants.GeneralConstants.PLUGIN_CONFIG
 import com.gaelmarhic.quadrant.constants.GeneralConstants.PLUGIN_NAME
-import com.gaelmarhic.quadrant.constants.GeneralConstants.TARGET_DIRECTORY
 import com.gaelmarhic.quadrant.extensions.QuadrantConfigurationExtension
 import com.gaelmarhic.quadrant.helpers.*
 import com.gaelmarhic.quadrant.models.modules.RawModule
 import com.gaelmarhic.quadrant.processors.GenerateActivityClassNameConstantProcessor
 import org.gradle.api.DefaultTask
-import org.gradle.api.Project
-import org.gradle.api.tasks.InputFile
-import org.gradle.api.tasks.InputFiles
-import org.gradle.api.tasks.OutputDirectory
-import org.gradle.api.tasks.TaskAction
+import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.provider.ListProperty
+import org.gradle.api.provider.Property
+import org.gradle.api.tasks.*
 import java.io.File
 
-open class GenerateActivityClassNameConstants : DefaultTask() {
+abstract class GenerateActivityClassNameConstants : DefaultTask() {
 
-    private val configurationExtension by lazy { retrieveConfigurationExtension() }
+    @get:Nested
+    abstract val configurationExtension: Property<QuadrantConfigurationExtension>
 
-    private val rawModules by lazy { retrieveRawModules() }
+    @get:InputFile
+    abstract val buildScript: RegularFileProperty
 
-    private val processor by lazy { initProcessor() }
+    @get:InputFiles
+    abstract val manifestFiles: ListProperty<File>
 
-    @InputFile
-    val buildScript = project.buildFile
+    @get:OutputDirectory
+    abstract val targetDirectory: DirectoryProperty
 
-    @InputFiles
-    val manifestFiles = rawModules.flatMap { it.manifestFiles }
-
-    @OutputDirectory
-    val targetDirectory = project.buildDir.resolve(TARGET_DIRECTORY)
+    @get:Input
+    abstract val rawModules: ListProperty<RawModule>
 
     init {
         group = PLUGIN_NAME
@@ -39,46 +37,23 @@ open class GenerateActivityClassNameConstants : DefaultTask() {
 
     @TaskAction
     fun generateConstants() {
-        processor.process(rawModules)
+        initProcessor().process(rawModules.get())
     }
-
-    private fun retrieveConfigurationExtension() =
-        project.extensions.findByName(PLUGIN_CONFIG) as QuadrantConfigurationExtension
-
-    private fun retrieveRawModules() =
-        project // This project is the project of the module where the plugin is applied.
-            .rootProject
-            .allprojects
-            .map { it.toRawModule() }
-
-    private fun Project.toRawModule() = RawModule(
-        name = name,
-        manifestFiles = manifestFiles
-    )
-
-    private val Project.manifestFiles: List<File>
-        get() = projectDir
-            .walk()
-            .maxDepth(MANIFEST_FILE_DEPTH)
-            .filter { it.name == MANIFEST_FILE_NAME }
-            .toList()
 
     private fun initProcessor() = GenerateActivityClassNameConstantProcessor(
         manifestParsingHelper = ManifestParsingHelper(),
         manifestVerificationHelper = ManifestVerificationHelper(),
         activityFilteringHelper = ActivityFilteringHelper(
-            configurationExtension = configurationExtension
+            configurationExtension = configurationExtension.get()
         ),
         constantFileDeterminationHelper = ConstantFileDeterminationHelper(
-            configurationExtension = configurationExtension
+            configurationExtension = configurationExtension.get()
         ),
-        constantGenerationHelper = ConstantGenerationHelper(targetDirectory)
+        constantGenerationHelper = ConstantGenerationHelper(targetDirectory.get().asFile)
     )
 
     companion object {
 
-        private const val MANIFEST_FILE_DEPTH = 3
-        private const val MANIFEST_FILE_NAME = "AndroidManifest.xml"
         private const val DESCRIPTION =
             "Generates files of constants that hold the Android Activities' full class name."
     }

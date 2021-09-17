@@ -13,6 +13,7 @@ class ConstantGenerationHelper(
 ) {
 
     fun generate(filesToBeGenerated: List<FileToBeGenerated>) {
+        targetDirectory.deleteRecursively()
         filesToBeGenerated.forEach { it.generate() }
     }
 

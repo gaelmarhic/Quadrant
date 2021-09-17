@@ -6,7 +6,6 @@ plugins {
 }
 
 repositories {
-    jcenter()
     mavenCentral()
     google()
 }
@@ -18,6 +17,7 @@ dependencies {
     implementation Dependencies.androidPlugin
     implementation Dependencies.kotlinStandardLibrary
     implementation Dependencies.kotlinPoet
+    implementation Dependencies.jacksonXml
 
     // Testing
     testImplementation Dependencies.jUnit5Api
