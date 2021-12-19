@@ -1,27 +1,19 @@
 package com.gaelmarhic.quadrant.helpers
 
-import com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES
-import com.fasterxml.jackson.dataformat.xml.XmlMapper
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector
 import com.gaelmarhic.quadrant.models.manifest.Manifest
 import com.gaelmarhic.quadrant.models.modules.ParsedManifest
 import com.gaelmarhic.quadrant.models.modules.ParsedModule
 import com.gaelmarhic.quadrant.models.modules.RawModule
 import java.io.File
+import javax.xml.bind.JAXBContext
 
 class ManifestParsingHelper {
 
-    private val xmlMapper = initXmlMapper()
+    private val jaxbUnMarshaller = JAXBContext.newInstance(Manifest::class.java).createUnmarshaller()
 
     fun parse(rawModules: List<RawModule>) =
         rawModules
             .map { it.parse() }
-
-    private fun initXmlMapper() =
-        XmlMapper().apply {
-            setAnnotationIntrospector(JaxbAnnotationIntrospector(typeFactory))
-            configure(FAIL_ON_UNKNOWN_PROPERTIES, false)
-        }
 
     private fun RawModule.parse() = ParsedModule(
         name = name,
@@ -32,8 +24,9 @@ class ManifestParsingHelper {
         .map { it.toManifest() }
 
     private fun File.toManifest() =
-        xmlMapper
-            .readValue(this, Manifest::class.java)
+        jaxbUnMarshaller
+            .unmarshal(this)
+            .let { it as Manifest }
             .let {
                 ParsedManifest(
                     path = absolutePath,
