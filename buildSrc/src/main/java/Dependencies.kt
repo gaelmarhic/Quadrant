@@ -4,7 +4,6 @@ object Dependencies {
     const val androidPlugin = "com.android.tools.build:gradle:${Versions.androidPlugin}"
     const val kotlinStandardLibrary = "org.jetbrains.kotlin:kotlin-stdlib"
     const val kotlinPoet = "com.squareup:kotlinpoet:${Versions.kotlinPoet}"
-    const val jacksonXml = "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${Versions.jackson}"
 
     // Testing
     const val jUnit5Api = "org.junit.jupiter:junit-jupiter-api:${Versions.jUnit5}"
