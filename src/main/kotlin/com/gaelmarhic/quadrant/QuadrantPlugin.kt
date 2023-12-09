@@ -107,8 +107,13 @@ class QuadrantPlugin : Plugin<Project> {
 
     private fun BaseExtension.sourceSet(name: String) = sourceSets.getByName(name)
 
-    private fun <T : BaseVariant> Task.isCompileKotlinTask(variant: T) =
-        name == "compile${variant.name.capitalize()}Kotlin"
+    private fun <T : BaseVariant> Task.isCompileKotlinTask(variant: T): Boolean {
+        val variantName = variant.name.capitalize()
+        return name in listOf(
+            "compile${variantName}Kotlin",
+            "ksp${variantName}Kotlin",
+        )
+    }
 
     companion object {
 
