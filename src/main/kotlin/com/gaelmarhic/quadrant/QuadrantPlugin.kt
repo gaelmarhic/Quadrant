@@ -93,9 +93,10 @@ class QuadrantPlugin : Plugin<Project> {
             .allprojects
             .map { it.toRawModule() }
 
-    private fun Project.toRawModule() = RawModule(
+    private fun Project.toRawModule(): RawModule = RawModule(
         name = name,
-        manifestFiles = manifestFiles
+        manifestFiles = manifestFiles,
+        namespace = extensions.findByType(BaseExtension::class.java)?.namespace.orEmpty()
     )
 
     private val Project.manifestFiles: List<File>

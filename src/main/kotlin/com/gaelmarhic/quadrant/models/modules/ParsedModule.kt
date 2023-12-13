@@ -4,7 +4,8 @@ import com.gaelmarhic.quadrant.models.manifest.Application
 
 data class ParsedModule(
     val name: String,
-    val manifestList: List<ParsedManifest>
+    val manifestList: List<ParsedManifest>,
+    val namespace: String = "",
 )
 
 data class ParsedManifest(

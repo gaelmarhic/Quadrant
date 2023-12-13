@@ -1,7 +1,7 @@
 object Versions {
 
     // Plugin
-    const val androidPlugin = "3.5.0"
+    const val androidPlugin = "7.3.0"
     const val kotlinPoet = "1.10.2"
 
     // Testing
