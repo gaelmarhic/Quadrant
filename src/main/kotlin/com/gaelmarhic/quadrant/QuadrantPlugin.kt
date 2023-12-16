@@ -50,7 +50,7 @@ class QuadrantPlugin : Plugin<Project> {
         afterEvaluate {
             variants.all { variant ->
                 tasks.all { task ->
-                    if (task.isCompileKotlinTask(variant)) {
+                    if (task.isCompileOrKspKotlinTask(variant)) {
                         task.dependsOn(taskToBeRegistered)
                     }
                 }
@@ -107,7 +107,7 @@ class QuadrantPlugin : Plugin<Project> {
 
     private fun BaseExtension.sourceSet(name: String) = sourceSets.getByName(name)
 
-    private fun <T : BaseVariant> Task.isCompileKotlinTask(variant: T): Boolean {
+    private fun <T : BaseVariant> Task.isCompileOrKspKotlinTask(variant: T): Boolean {
         val variantName = variant.name.capitalize()
         return name in listOf(
             "compile${variantName}Kotlin",
