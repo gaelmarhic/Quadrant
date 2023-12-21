@@ -2,7 +2,7 @@ plugins {
     id "org.jetbrains.kotlin.jvm" version "1.4.0"
     id "com.gradle.plugin-publish" version "0.11.0"
     id 'java-gradle-plugin'
-    id "maven-publish"
+    id "maven"
 }
 
 repositories {
@@ -35,10 +35,10 @@ compileTestKotlin {
 group = "com.gaelmarhic"
 version = "1.8"
 
-publishing {
+uploadArchives {
     repositories {
-        maven {
-            url = uri('mavenrepo')
+        mavenDeployer {
+            repository(url: uri('mavenrepo'))
         }
     }
 }
