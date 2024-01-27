@@ -194,7 +194,7 @@ internal class ActivityFilteringHelperTest {
         }
 
         @Nested
-        @DisplayName("When activity has a partially qualified name")
+        @DisplayName("And activity has a partially qualified name")
         inner class PartiallyQualifiedClassName {
 
             @Test
