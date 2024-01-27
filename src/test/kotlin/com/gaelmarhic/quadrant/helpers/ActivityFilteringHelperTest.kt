@@ -193,50 +193,102 @@ internal class ActivityFilteringHelperTest {
             assertContainsClassName(filteredModules, activityFqcn)
         }
 
-        @Test
-        fun `Then activity defined with PQCN should be mapped to FQCN`() {
+        @Nested
+        @DisplayName("When activity has a partially qualified name")
+        inner class PartiallyQualifiedClassName {
 
-            // Given
-            val manifestPackageName = "com.gaelmarhic.quadrant"
-            val activityPqcn = ".Activity"
-            val activityFqcn = manifestPackageName + activityPqcn
+            @Test
+            fun `Then activity should be mapped to FQCN with manifest package name`() {
 
-            val parsedModule = ParsedModule(
-                name = "module",
-                manifestList = listOf(
-                    ParsedManifest(
-                        path = "manifestPath",
-                        application = Application(
-                            activityList = mutableListOf(
-                                Activity(
-                                    className = activityPqcn,
-                                    metaDataList = mutableListOf(
-                                        MetaData(
-                                            name = "addressable",
-                                            value = "true"
+                // Given
+                val manifestPackageName = "com.gaelmarhic.quadrant"
+                val activityPqcn = ".Activity"
+                val activityFqcn = manifestPackageName + activityPqcn
+
+                val parsedModule = ParsedModule(
+                    name = "module",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "manifestPath",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityPqcn,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "addressable",
+                                                value = "true"
+                                            )
                                         )
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "true"
                                     )
                                 )
                             ),
-                            metaDataList = mutableListOf(
-                                MetaData(
-                                    name = "addressable",
-                                    value = "true"
-                                )
-                            )
-                        ),
-                        packageName = manifestPackageName
+                            packageName = manifestPackageName
+                        )
                     )
                 )
-            )
 
-            val parsedModules = listOf(parsedModule)
+                val parsedModules = listOf(parsedModule)
 
-            // When
-            val filteredModules = activityFilteringHelper.filter(parsedModules)
+                // When
+                val filteredModules = activityFilteringHelper.filter(parsedModules)
 
-            // Then
-            assertContainsClassName(filteredModules, activityFqcn)
+                // Then
+                assertContainsClassName(filteredModules, activityFqcn)
+            }
+
+            @Test
+            fun `Then activity should be mapped to FQCN with module namespace`() {
+
+                // Given
+                val namespace = "com.gaelmarhic.quadrant"
+                val activityPqcn = ".Activity"
+                val activityFqcn = namespace + activityPqcn
+
+                val parsedModule = ParsedModule(
+                    name = "module",
+                    manifestList = listOf(
+                        ParsedManifest(
+                            path = "manifestPath",
+                            application = Application(
+                                activityList = mutableListOf(
+                                    Activity(
+                                        className = activityPqcn,
+                                        metaDataList = mutableListOf(
+                                            MetaData(
+                                                name = "addressable",
+                                                value = "true"
+                                            )
+                                        )
+                                    )
+                                ),
+                                metaDataList = mutableListOf(
+                                    MetaData(
+                                        name = "addressable",
+                                        value = "true"
+                                    )
+                                )
+                            ),
+                            packageName = "",
+                        )
+                    ),
+                    namespace = namespace,
+                )
+
+                val parsedModules = listOf(parsedModule)
+
+                // When
+                val filteredModules = activityFilteringHelper.filter(parsedModules)
+
+                // Then
+                assertContainsClassName(filteredModules, activityFqcn)
+            }
         }
     }
 

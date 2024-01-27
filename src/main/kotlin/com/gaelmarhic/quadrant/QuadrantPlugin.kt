@@ -39,7 +39,9 @@ class QuadrantPlugin : Plugin<Project> {
         val variants = block(extension)
         val mainSourceSet = extension.sourceSet(MAIN_SOURCE_SET)
 
-        registerTask(createGenerateActivityClassNameConstantsTask(), variants)
+        gradle.projectsEvaluated {
+            registerTask(createGenerateActivityClassNameConstantsTask(), variants)
+        }
         addTargetDirectoryToSourceSet(mainSourceSet)
     }
 
@@ -47,12 +49,10 @@ class QuadrantPlugin : Plugin<Project> {
         taskToBeRegistered: Task,
         variants: DomainObjectCollection<V>
     ) {
-        afterEvaluate {
-            variants.all { variant ->
-                tasks.all { task ->
-                    if (task.isCompileOrKspKotlinTask(variant)) {
-                        task.dependsOn(taskToBeRegistered)
-                    }
+        variants.all { variant ->
+            tasks.all { task ->
+                if (task.isCompileOrKspKotlinTask(variant)) {
+                    task.dependsOn(taskToBeRegistered)
                 }
             }
         }
@@ -95,7 +95,8 @@ class QuadrantPlugin : Plugin<Project> {
 
     private fun Project.toRawModule() = RawModule(
         name = name,
-        manifestFiles = manifestFiles
+        manifestFiles = manifestFiles,
+        namespace = extensions.findByType(BaseExtension::class.java)?.namespace.orEmpty()
     )
 
     private val Project.manifestFiles: List<File>

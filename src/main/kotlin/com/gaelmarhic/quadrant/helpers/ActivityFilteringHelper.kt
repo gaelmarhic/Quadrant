@@ -23,8 +23,7 @@ class ActivityFilteringHelper(
             .mapNotNull { it.applyFilter() }
 
     private fun ParsedModule.applyFilter() =
-        manifestList
-            .generateFullyQualifiedClassNames()
+        generateFullyQualifiedClassNames()
             .filterClassNames()
             .takeIf { it.isNotEmpty() }
             ?.let { classNames ->
@@ -34,9 +33,10 @@ class ActivityFilteringHelper(
                 )
             }
 
-    private fun List<ParsedManifest>.generateFullyQualifiedClassNames() = map { manifest ->
+    private fun ParsedModule.generateFullyQualifiedClassNames() = manifestList.map { manifest ->
         val activityList = manifest.application.activityList.map { activity ->
-            val className = createFullyQualifiedClassName(manifest.packageName, activity.className)
+            val packageName = manifest.packageName.ifEmpty { namespace }
+            val className = createFullyQualifiedClassName(packageName, activity.className)
             Activity(className, activity.metaDataList)
         }.toMutableList()
         val application = manifest.application.copy(activityList = activityList)

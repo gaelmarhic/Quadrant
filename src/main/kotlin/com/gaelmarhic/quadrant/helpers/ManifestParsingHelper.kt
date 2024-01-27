@@ -17,7 +17,8 @@ class ManifestParsingHelper {
 
     private fun RawModule.parse() = ParsedModule(
         name = name,
-        manifestList = manifestFiles.toManifestList()
+        manifestList = manifestFiles.toManifestList(),
+        namespace = namespace,
     )
 
     private fun List<File>.toManifestList() = this
