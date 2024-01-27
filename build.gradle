@@ -15,6 +15,7 @@ dependencies {
     // Plugin
     implementation gradleApi()
     implementation Dependencies.androidPlugin
+    implementation Dependencies.jaxb
     implementation Dependencies.kotlinStandardLibrary
     implementation Dependencies.kotlinPoet
 
