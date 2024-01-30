@@ -38,9 +38,11 @@ class QuadrantPlugin : Plugin<Project> {
         val extension = getExtension(extensionType)
         val variants = block(extension)
         val mainSourceSet = extension.sourceSet(MAIN_SOURCE_SET)
+        val quadrantExtension = registerConfigurationExtension()
 
         gradle.projectsEvaluated {
-            registerTask(createGenerateActivityClassNameConstantsTask(), variants)
+            val task = createGenerateActivityClassNameConstantsTask(quadrantExtension)
+            registerTask(task, variants)
         }
         addTargetDirectoryToSourceSet(mainSourceSet)
     }
@@ -68,10 +70,11 @@ class QuadrantPlugin : Plugin<Project> {
         return getByType(type.java)
     }
 
-    private fun Project.createGenerateActivityClassNameConstantsTask(): Task {
+    private fun Project.createGenerateActivityClassNameConstantsTask(
+        extension: QuadrantConfigurationExtension
+    ): Task {
         val taskType = GenerateActivityClassNameConstants::class.java
         val taskName = taskType.simpleName.decapitalize()
-        val extension = registerConfigurationExtension()
         return tasks.create(taskName, taskType) { task ->
             val rawModuleList = retrieveRawModuleList(this)
             task.apply {
